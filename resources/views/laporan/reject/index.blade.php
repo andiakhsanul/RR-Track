@@ -115,6 +115,20 @@
                                 <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-cyan-100 text-cyan-700">
                                     {{ $laporan->modalitas->nama_modalitas ?? '-' }}
                                 </span>
+                                @if($laporan->kesalahan_label || $laporan->insiden_reaksi_obat_kontras)
+                                    <div class="flex flex-wrap gap-1 mt-1">
+                                        @if($laporan->kesalahan_label)
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-700" title="Kesalahan Label">
+                                                <i class="fas fa-tag mr-1"></i> Label
+                                            </span>
+                                        @endif
+                                        @if($laporan->insiden_reaksi_obat_kontras)
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700" title="Reaksi Obat Kontras">
+                                                <i class="fas fa-syringe mr-1"></i> Kontras
+                                            </span>
+                                        @endif
+                                    </div>
+                                @endif
                             </div>
                         </td>
                         <td class="px-6 py-4">

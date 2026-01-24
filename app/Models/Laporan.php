@@ -22,10 +22,14 @@ class Laporan extends Model
         'id_modalitas',
         'id_petugas',
         'keterangan',
+        'kesalahan_label',
+        'insiden_reaksi_obat_kontras',
     ];
 
     protected $casts = [
         'tanggal_pemeriksaan' => 'date',
+        'kesalahan_label' => 'boolean',
+        'insiden_reaksi_obat_kontras' => 'boolean',
     ];
 
     /**

@@ -143,33 +143,41 @@
                 </div>
             </div>
 
-            <!-- Faktor Penyebab -->
+            <!-- Insiden Khusus -->
             <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
                 <div class="px-6 py-4 border-b border-slate-100 bg-gradient-to-r from-orange-50 to-amber-50">
                     <h2 class="text-lg font-semibold text-slate-800 flex items-center">
                         <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center mr-3">
                             <i class="fas fa-exclamation-triangle text-white text-sm"></i>
                         </div>
-                        Faktor Penyebab
+                        Insiden Khusus
                     </h2>
                 </div>
                 <div class="p-6">
-                    @php
-                        $selectedFaktors = old('faktor_penyebab', $laporan->faktorPenyebab->pluck('id_faktor')->toArray());
-                    @endphp
+                    <p class="text-sm text-slate-500 mb-4">Centang jika terjadi insiden khusus berikut:</p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        @foreach($faktorPenyebab as $fp)
-                            <label class="flex items-center p-4 bg-slate-50 rounded-xl cursor-pointer hover:bg-orange-50 transition-colors group">
-                                <input type="checkbox" name="faktor_penyebab[]" value="{{ $fp->id_faktor }}"
-                                       {{ in_array($fp->id_faktor, $selectedFaktors) ? 'checked' : '' }}
-                                       class="w-5 h-5 rounded border-slate-300 text-orange-500 focus:ring-orange-500">
-                                <span class="ml-3 text-sm font-medium text-slate-700 group-hover:text-slate-900">{{ $fp->nama_faktor }}</span>
-                            </label>
-                        @endforeach
+                        <!-- Kesalahan Pemberian Label -->
+                        <label class="flex items-center p-4 bg-slate-50 rounded-xl cursor-pointer hover:bg-orange-50 transition-colors group border-2 border-transparent hover:border-orange-300">
+                            <input type="checkbox" name="kesalahan_label" value="1"
+                                   {{ old('kesalahan_label', $laporan->kesalahan_label) ? 'checked' : '' }}
+                                   class="w-5 h-5 rounded border-slate-300 text-orange-500 focus:ring-orange-500">
+                            <div class="ml-3">
+                                <span class="text-sm font-medium text-slate-700 group-hover:text-slate-900">Kesalahan Pemberian Label</span>
+                                <p class="text-xs text-slate-500">Terjadi kesalahan dalam pemberian label pasien</p>
+                            </div>
+                        </label>
+
+                        <!-- Insiden Reaksi Obat Kontras -->
+                        <label class="flex items-center p-4 bg-slate-50 rounded-xl cursor-pointer hover:bg-orange-50 transition-colors group border-2 border-transparent hover:border-orange-300">
+                            <input type="checkbox" name="insiden_reaksi_obat_kontras" value="1"
+                                   {{ old('insiden_reaksi_obat_kontras', $laporan->insiden_reaksi_obat_kontras) ? 'checked' : '' }}
+                                   class="w-5 h-5 rounded border-slate-300 text-orange-500 focus:ring-orange-500">
+                            <div class="ml-3">
+                                <span class="text-sm font-medium text-slate-700 group-hover:text-slate-900">Insiden Reaksi Obat Kontras</span>
+                                <p class="text-xs text-slate-500">Terjadi reaksi terhadap obat kontras</p>
+                            </div>
+                        </label>
                     </div>
-                    @error('faktor_penyebab')
-                        <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
-                    @enderror
                 </div>
             </div>
 

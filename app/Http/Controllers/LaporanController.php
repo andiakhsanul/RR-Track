@@ -50,14 +50,12 @@ class LaporanController extends Controller
         $petugas = Petugas::orderBy('inisial')->get();
         $modalitas = Modalitas::orderBy('nama_modalitas')->get();
         $jenisPemeriksaan = JenisPemeriksaan::orderBy('nama_jenis_pemeriksaan')->get();
-        $faktorPenyebab = FaktorPenyebab::orderBy('nama_faktor')->get();
         $jenisInsiden = JenisInsiden::orderBy('nama_insiden')->get();
 
         return view('laporan.repeat.create', compact(
             'petugas',
             'modalitas',
             'jenisPemeriksaan',
-            'faktorPenyebab',
             'jenisInsiden'
         ));
     }
@@ -97,6 +95,8 @@ class LaporanController extends Controller
             'insiden' => 'nullable|array',
             'insiden.*' => 'exists:jenis_insiden,id_insiden',
             'keterangan' => 'nullable|string',
+            'kesalahan_label' => 'nullable|boolean',
+            'insiden_reaksi_obat_kontras' => 'nullable|boolean',
         ]);
 
         // Find or create pasien
@@ -119,6 +119,8 @@ class LaporanController extends Controller
             'id_modalitas' => $validated['id_modalitas'],
             'id_petugas' => $validated['id_petugas'],
             'keterangan' => $validated['keterangan'],
+            'kesalahan_label' => $request->boolean('kesalahan_label'),
+            'insiden_reaksi_obat_kontras' => $request->boolean('insiden_reaksi_obat_kontras'),
         ]);
 
         // Attach insiden
@@ -147,6 +149,8 @@ class LaporanController extends Controller
             'insiden' => 'nullable|array',
             'insiden.*' => 'exists:jenis_insiden,id_insiden',
             'keterangan' => 'nullable|string',
+            'kesalahan_label' => 'nullable|boolean',
+            'insiden_reaksi_obat_kontras' => 'nullable|boolean',
         ]);
 
         // Find or create pasien
@@ -169,6 +173,8 @@ class LaporanController extends Controller
             'id_modalitas' => $validated['id_modalitas'],
             'id_petugas' => $validated['id_petugas'],
             'keterangan' => $validated['keterangan'],
+            'kesalahan_label' => $request->boolean('kesalahan_label'),
+            'insiden_reaksi_obat_kontras' => $request->boolean('insiden_reaksi_obat_kontras'),
         ]);
 
         // Attach faktor penyebab
@@ -212,7 +218,6 @@ class LaporanController extends Controller
         $petugas = Petugas::orderBy('inisial')->get();
         $modalitas = Modalitas::orderBy('nama_modalitas')->get();
         $jenisPemeriksaan = JenisPemeriksaan::orderBy('nama_jenis_pemeriksaan')->get();
-        $faktorPenyebab = FaktorPenyebab::orderBy('nama_faktor')->get();
         $jenisInsiden = JenisInsiden::orderBy('nama_insiden')->get();
 
         return view('laporan.repeat.edit', compact(
@@ -220,7 +225,6 @@ class LaporanController extends Controller
             'petugas',
             'modalitas',
             'jenisPemeriksaan',
-            'faktorPenyebab',
             'jenisInsiden'
         ));
     }
@@ -262,6 +266,8 @@ class LaporanController extends Controller
             'insiden' => 'nullable|array',
             'insiden.*' => 'exists:jenis_insiden,id_insiden',
             'keterangan' => 'nullable|string',
+            'kesalahan_label' => 'nullable|boolean',
+            'insiden_reaksi_obat_kontras' => 'nullable|boolean',
         ]);
 
         // Find or create pasien
@@ -283,6 +289,8 @@ class LaporanController extends Controller
             'id_modalitas' => $validated['id_modalitas'],
             'id_petugas' => $validated['id_petugas'],
             'keterangan' => $validated['keterangan'],
+            'kesalahan_label' => $request->boolean('kesalahan_label'),
+            'insiden_reaksi_obat_kontras' => $request->boolean('insiden_reaksi_obat_kontras'),
         ]);
 
         // Sync insiden
@@ -309,6 +317,8 @@ class LaporanController extends Controller
             'insiden' => 'nullable|array',
             'insiden.*' => 'exists:jenis_insiden,id_insiden',
             'keterangan' => 'nullable|string',
+            'kesalahan_label' => 'nullable|boolean',
+            'insiden_reaksi_obat_kontras' => 'nullable|boolean',
         ]);
 
         // Find or create pasien
@@ -330,6 +340,8 @@ class LaporanController extends Controller
             'id_modalitas' => $validated['id_modalitas'],
             'id_petugas' => $validated['id_petugas'],
             'keterangan' => $validated['keterangan'],
+            'kesalahan_label' => $request->boolean('kesalahan_label'),
+            'insiden_reaksi_obat_kontras' => $request->boolean('insiden_reaksi_obat_kontras'),
         ]);
 
         // Sync faktor penyebab

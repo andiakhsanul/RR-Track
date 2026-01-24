@@ -190,21 +190,57 @@
                 <div class="p-6">
                     <p class="text-sm text-slate-500 mb-4">Pilih satu atau lebih faktor penyebab reject</p>
                     @php
-                        $selectedFaktors = old('faktor_penyebab', $laporan->faktorPenyebab->pluck('id_faktor')->toArray());
+                        $selectedFaktors = old('faktor', $laporan->faktorPenyebab->pluck('id_faktor')->toArray());
                     @endphp
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach($faktorPenyebab as $faktor)
                             <label class="relative flex items-start p-4 bg-slate-50 rounded-xl border-2 {{ in_array($faktor->id_faktor, $selectedFaktors) ? 'border-red-400 bg-red-50' : 'border-transparent' }} hover:border-red-300 hover:bg-red-50 cursor-pointer transition-all group">
-                                <input type="checkbox" name="faktor_penyebab[]" value="{{ $faktor->id_faktor }}"
+                                <input type="checkbox" name="faktor[]" value="{{ $faktor->id_faktor }}"
                                        class="h-5 w-5 rounded border-slate-300 text-red-600 focus:ring-red-500 mt-0.5"
                                        {{ in_array($faktor->id_faktor, $selectedFaktors) ? 'checked' : '' }}>
                                 <span class="ml-3 text-sm text-slate-700 group-hover:text-slate-900">{{ $faktor->nama_faktor }}</span>
                             </label>
                         @endforeach
                     </div>
-                    @error('faktor_penyebab')
+                    @error('faktor')
                         <p class="text-red-500 text-sm mt-3">{{ $message }}</p>
                     @enderror
+                </div>
+            </div>
+
+            <!-- Insiden Khusus Section -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden mb-6">
+                <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 px-6 py-4">
+                    <h2 class="text-lg font-semibold text-white flex items-center">
+                        <i class="fas fa-exclamation-circle mr-3"></i>
+                        Insiden Khusus
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <p class="text-sm text-slate-500 mb-4">Centang jika terjadi insiden khusus berikut:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Kesalahan Pemberian Label -->
+                        <label class="relative flex items-start p-4 bg-slate-50 rounded-xl border-2 {{ old('kesalahan_label', $laporan->kesalahan_label) ? 'border-yellow-400 bg-yellow-50' : 'border-transparent' }} hover:border-yellow-300 hover:bg-yellow-50 cursor-pointer transition-all group">
+                            <input type="checkbox" name="kesalahan_label" value="1"
+                                   class="h-5 w-5 rounded border-slate-300 text-yellow-600 focus:ring-yellow-500 mt-0.5"
+                                   {{ old('kesalahan_label', $laporan->kesalahan_label) ? 'checked' : '' }}>
+                            <div class="ml-3">
+                                <span class="text-sm font-medium text-slate-700 group-hover:text-slate-900">Kesalahan Pemberian Label</span>
+                                <p class="text-xs text-slate-500 mt-1">Terjadi kesalahan dalam pemberian label pasien</p>
+                            </div>
+                        </label>
+
+                        <!-- Insiden Reaksi Obat Kontras -->
+                        <label class="relative flex items-start p-4 bg-slate-50 rounded-xl border-2 {{ old('insiden_reaksi_obat_kontras', $laporan->insiden_reaksi_obat_kontras) ? 'border-yellow-400 bg-yellow-50' : 'border-transparent' }} hover:border-yellow-300 hover:bg-yellow-50 cursor-pointer transition-all group">
+                            <input type="checkbox" name="insiden_reaksi_obat_kontras" value="1"
+                                   class="h-5 w-5 rounded border-slate-300 text-yellow-600 focus:ring-yellow-500 mt-0.5"
+                                   {{ old('insiden_reaksi_obat_kontras', $laporan->insiden_reaksi_obat_kontras) ? 'checked' : '' }}>
+                            <div class="ml-3">
+                                <span class="text-sm font-medium text-slate-700 group-hover:text-slate-900">Insiden Reaksi Obat Kontras</span>
+                                <p class="text-xs text-slate-500 mt-1">Terjadi reaksi terhadap obat kontras</p>
+                            </div>
+                        </label>
+                    </div>
                 </div>
             </div>
 

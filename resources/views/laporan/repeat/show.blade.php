@@ -97,25 +97,47 @@
             </div>
         </div>
 
-        <!-- Faktor Penyebab -->
+        <!-- Insiden Khusus -->
         <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
             <div class="px-6 py-4 border-b border-slate-100 bg-gradient-to-r from-orange-50 to-amber-50">
                 <h2 class="text-lg font-semibold text-slate-800 flex items-center">
                     <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center mr-3">
                         <i class="fas fa-exclamation-triangle text-white text-sm"></i>
                     </div>
-                    Faktor Penyebab
+                    Insiden Khusus
                 </h2>
             </div>
             <div class="p-6">
-                <div class="flex flex-wrap gap-3">
-                    @forelse($laporan->faktorPenyebab as $faktor)
-                        <span class="inline-flex items-center px-4 py-2 rounded-xl text-sm font-medium bg-orange-100 text-orange-700">
-                            <i class="fas fa-tag mr-2"></i> {{ $faktor->nama_faktor }}
-                        </span>
-                    @empty
-                        <p class="text-slate-500 italic">Tidak ada faktor penyebab tercatat</p>
-                    @endforelse
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Kesalahan Pemberian Label -->
+                    <div class="p-4 rounded-xl {{ $laporan->kesalahan_label ? 'bg-orange-100 border-2 border-orange-300' : 'bg-slate-50' }}">
+                        <div class="flex items-center">
+                            @if($laporan->kesalahan_label)
+                                <i class="fas fa-check-circle text-orange-600 text-xl mr-3"></i>
+                            @else
+                                <i class="fas fa-times-circle text-slate-400 text-xl mr-3"></i>
+                            @endif
+                            <div>
+                                <span class="text-sm font-medium {{ $laporan->kesalahan_label ? 'text-orange-700' : 'text-slate-500' }}">Kesalahan Pemberian Label</span>
+                                <p class="text-xs {{ $laporan->kesalahan_label ? 'text-orange-600' : 'text-slate-400' }}">{{ $laporan->kesalahan_label ? 'Ya' : 'Tidak' }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Insiden Reaksi Obat Kontras -->
+                    <div class="p-4 rounded-xl {{ $laporan->insiden_reaksi_obat_kontras ? 'bg-orange-100 border-2 border-orange-300' : 'bg-slate-50' }}">
+                        <div class="flex items-center">
+                            @if($laporan->insiden_reaksi_obat_kontras)
+                                <i class="fas fa-check-circle text-orange-600 text-xl mr-3"></i>
+                            @else
+                                <i class="fas fa-times-circle text-slate-400 text-xl mr-3"></i>
+                            @endif
+                            <div>
+                                <span class="text-sm font-medium {{ $laporan->insiden_reaksi_obat_kontras ? 'text-orange-700' : 'text-slate-500' }}">Insiden Reaksi Obat Kontras</span>
+                                <p class="text-xs {{ $laporan->insiden_reaksi_obat_kontras ? 'text-orange-600' : 'text-slate-400' }}">{{ $laporan->insiden_reaksi_obat_kontras ? 'Ya' : 'Tidak' }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

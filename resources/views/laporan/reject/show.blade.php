@@ -97,6 +97,51 @@
             </div>
         </div>
 
+        <!-- Insiden Khusus Section -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-100">
+                <h2 class="text-lg font-semibold text-slate-800 flex items-center">
+                    <div class="w-8 h-8 rounded-lg bg-yellow-100 flex items-center justify-center mr-3">
+                        <i class="fas fa-exclamation-circle text-yellow-600"></i>
+                    </div>
+                    Insiden Khusus
+                </h2>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Kesalahan Pemberian Label -->
+                    <div class="p-4 rounded-xl {{ $laporan->kesalahan_label ? 'bg-yellow-100 border-2 border-yellow-300' : 'bg-slate-50' }}">
+                        <div class="flex items-center">
+                            @if($laporan->kesalahan_label)
+                                <i class="fas fa-check-circle text-yellow-600 text-xl mr-3"></i>
+                            @else
+                                <i class="fas fa-times-circle text-slate-400 text-xl mr-3"></i>
+                            @endif
+                            <div>
+                                <span class="text-sm font-medium {{ $laporan->kesalahan_label ? 'text-yellow-700' : 'text-slate-500' }}">Kesalahan Pemberian Label</span>
+                                <p class="text-xs {{ $laporan->kesalahan_label ? 'text-yellow-600' : 'text-slate-400' }}">{{ $laporan->kesalahan_label ? 'Ya' : 'Tidak' }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Insiden Reaksi Obat Kontras -->
+                    <div class="p-4 rounded-xl {{ $laporan->insiden_reaksi_obat_kontras ? 'bg-yellow-100 border-2 border-yellow-300' : 'bg-slate-50' }}">
+                        <div class="flex items-center">
+                            @if($laporan->insiden_reaksi_obat_kontras)
+                                <i class="fas fa-check-circle text-yellow-600 text-xl mr-3"></i>
+                            @else
+                                <i class="fas fa-times-circle text-slate-400 text-xl mr-3"></i>
+                            @endif
+                            <div>
+                                <span class="text-sm font-medium {{ $laporan->insiden_reaksi_obat_kontras ? 'text-yellow-700' : 'text-slate-500' }}">Insiden Reaksi Obat Kontras</span>
+                                <p class="text-xs {{ $laporan->insiden_reaksi_obat_kontras ? 'text-yellow-600' : 'text-slate-400' }}">{{ $laporan->insiden_reaksi_obat_kontras ? 'Ya' : 'Tidak' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Keterangan Section -->
         <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
             <div class="px-6 py-4 border-b border-slate-100">
