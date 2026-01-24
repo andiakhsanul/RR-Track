@@ -14,10 +14,10 @@ class FaktorPenyebabSeeder extends Seeder
     public function run(): void
     {
         $faktorList = [
-            'Human Error',
-            'Tools Error',
-            'Patient Error',
-            'Administratif',
+            'Human Error (Posisi Px, SOP, Kesalahan Teknis, FE ,Artefak)',
+            'Tools Error (Alat Rusak, Prosesing, Server down, Aliran Tidak Stabil)',
+            'Patient Error (Px tidak kooperatif, Px Moving)',
+            'Administratif (Print Double, Double input,, Data Masuk Tidak Sesuai)',
         ];
 
         foreach ($faktorList as $nama) {
