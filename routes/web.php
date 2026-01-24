@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,24 +11,22 @@ use App\Http\Controllers\LaporanController;
 |--------------------------------------------------------------------------
 */
 
-// Redirect root to login
+// Redirect root to login or dashboard
 Route::get('/', function () {
-    return redirect()->route('login');
+    return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
 });
 
-// Authentication Routes (Guest Only)
-Route::middleware('guest')->group(function () {
-    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-});
+// Dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 // Protected Routes (Auth Required)
 Route::middleware('auth')->group(function () {
-    // Logout
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-    // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Profile Routes (from Breeze)
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Laporan Repeat Routes
     Route::prefix('laporan/repeat')->name('laporan.repeat.')->group(function () {
@@ -52,3 +50,6 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{laporan}', [LaporanController::class, 'destroy'])->name('destroy');
     });
 });
+
+// Auth Routes (from Breeze)
+require __DIR__.'/auth.php';
