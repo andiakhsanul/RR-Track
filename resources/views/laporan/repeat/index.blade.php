@@ -11,7 +11,7 @@
         <p class="text-slate-500">Kelola semua laporan pemeriksaan ulang</p>
     </div>
     <a href="{{ route('laporan.repeat.create') }}"
-       class="mt-4 md:mt-0 inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+       class="mt-4 md:mt-0 inline-flex items-center px-6 py-3 bg-gradient-to-r from-teal-600 to-teal-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
         <i class="fas fa-plus mr-2"></i>
         Tambah Laporan
     </a>
@@ -21,8 +21,8 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
     <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
         <div class="flex items-center space-x-4">
-            <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
-                <i class="fas fa-file-alt text-blue-600"></i>
+            <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center">
+                <i class="fas fa-file-alt text-teal-600"></i>
             </div>
             <div>
                 <p class="text-2xl font-bold text-slate-800">{{ $laporanList->total() }}</p>
@@ -65,7 +65,7 @@
                 </div>
                 <input type="text" name="search" value="{{ request('search') }}"
                        placeholder="Cari nama pasien, no. RM, atau keterangan..."
-                       class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all">
+                       class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-teal-500 focus:bg-white transition-all">
             </div>
             <button type="submit" class="px-6 py-3 bg-slate-800 text-white font-medium rounded-xl hover:bg-slate-700 transition-colors">
                 <i class="fas fa-filter mr-2"></i> Filter
@@ -94,8 +94,8 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex items-center">
-                                <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center mr-3">
-                                    <i class="fas fa-calendar text-blue-600 text-sm"></i>
+                                <div class="w-10 h-10 rounded-xl bg-teal-100 flex items-center justify-center mr-3">
+                                    <i class="fas fa-calendar text-teal-600 text-sm"></i>
                                 </div>
                                 <div>
                                     <p class="text-sm font-medium text-slate-800">{{ $laporan->tanggal_pemeriksaan->format('d M Y') }}</p>
@@ -142,7 +142,7 @@
                         <td class="px-6 py-4">
                             <div class="flex items-center justify-center space-x-2">
                                 <a href="{{ route('laporan.repeat.show', $laporan) }}"
-                                   class="p-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-blue-100 hover:text-blue-600 transition-colors" title="Detail">
+                                   class="p-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-teal-100 hover:text-teal-600 transition-colors" title="Detail">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <a href="{{ route('laporan.repeat.edit', $laporan) }}"
@@ -169,7 +169,7 @@
                                 </div>
                                 <p class="text-slate-500 font-medium mb-2">Belum ada data laporan</p>
                                 <p class="text-sm text-slate-400 mb-4">Mulai tambahkan laporan pertama Anda</p>
-                                <a href="{{ route('laporan.repeat.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors">
+                                <a href="{{ route('laporan.repeat.create') }}" class="inline-flex items-center px-4 py-2 bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-teal-700 transition-colors">
                                     <i class="fas fa-plus mr-2"></i> Tambah Laporan
                                 </a>
                             </div>

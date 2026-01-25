@@ -26,9 +26,9 @@
         <div class="lg:col-span-2 space-y-6">
             <!-- Data Laporan -->
             <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                <div class="px-6 py-4 border-b border-slate-100 bg-gradient-to-r from-blue-50 to-cyan-50">
+                <div class="px-6 py-4 border-b border-slate-100 bg-gradient-to-r from-teal-50 to-cyan-50">
                     <h2 class="text-lg font-semibold text-slate-800 flex items-center">
-                        <div class="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center mr-3">
+                        <div class="w-8 h-8 rounded-lg bg-teal-600 flex items-center justify-center mr-3">
                             <i class="fas fa-file-medical text-white text-sm"></i>
                         </div>
                         Data Laporan
@@ -41,7 +41,7 @@
                             Tanggal Pemeriksaan <span class="text-red-500">*</span>
                         </label>
                         <input type="date" name="tanggal_pemeriksaan" value="{{ old('tanggal_pemeriksaan', now()->format('Y-m-d')) }}"
-                               class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all @error('tanggal_pemeriksaan') border-red-500 @enderror">
+                               class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-teal-500 focus:bg-white transition-all @error('tanggal_pemeriksaan') border-red-500 @enderror">
                         @error('tanggal_pemeriksaan')
                             <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
@@ -54,7 +54,7 @@
                                 Modalitas <span class="text-red-500">*</span>
                             </label>
                             <select name="id_modalitas" id="id_modalitas"
-                                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all @error('id_modalitas') border-red-500 @enderror">
+                                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-teal-500 focus:bg-white transition-all @error('id_modalitas') border-red-500 @enderror">
                                 <option value="">-- Pilih Modalitas --</option>
                                 @foreach($modalitas as $m)
                                     <option value="{{ $m->id_modalitas }}" {{ old('id_modalitas') == $m->id_modalitas ? 'selected' : '' }}>{{ $m->nama_modalitas }}</option>
@@ -71,7 +71,7 @@
                                 Jenis Pemeriksaan <span class="text-red-500">*</span>
                             </label>
                             <select name="id_jenis_pemeriksaan" id="id_jenis_pemeriksaan"
-                                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all @error('id_jenis_pemeriksaan') border-red-500 @enderror">
+                                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-teal-500 focus:bg-white transition-all @error('id_jenis_pemeriksaan') border-red-500 @enderror">
                                 <option value="">-- Pilih Jenis --</option>
                                 @foreach($jenisPemeriksaan as $jp)
                                     <option value="{{ $jp->id_jenis_pemeriksaan }}" {{ old('id_jenis_pemeriksaan') == $jp->id_jenis_pemeriksaan ? 'selected' : '' }}>{{ $jp->nama_jenis_pemeriksaan }}</option>
@@ -89,7 +89,7 @@
                             Petugas <span class="text-red-500">*</span>
                         </label>
                         <select name="id_petugas"
-                                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:bg-white transition-all @error('id_petugas') border-red-500 @enderror">
+                                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-teal-500 focus:bg-white transition-all @error('id_petugas') border-red-500 @enderror">
                             <option value="">-- Pilih Petugas --</option>
                             @foreach($petugas as $p)
                                 <option value="{{ $p->id_petugas }}" {{ old('id_petugas') == $p->id_petugas ? 'selected' : '' }}>{{ $p->inisial }}</option>
@@ -203,7 +203,7 @@
         <div class="lg:col-span-1">
             <div class="sticky top-24 space-y-6">
                 <!-- Info Card -->
-                <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white">
+                <div class="bg-gradient-to-br from-teal-600 to-teal-700 rounded-2xl p-6 text-white">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
                             <i class="fas fa-info-circle text-2xl"></i>
@@ -217,7 +217,7 @@
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
                     <h3 class="text-sm font-semibold text-slate-700 mb-4">Aksi</h3>
                     <div class="space-y-3">
-                        <button type="submit" class="w-full py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+                        <button type="submit" class="w-full py-3 bg-gradient-to-r from-teal-600 to-teal-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
                             <i class="fas fa-save mr-2"></i> Simpan Laporan
                         </button>
                         <a href="{{ route('laporan.repeat.index') }}" class="w-full py-3 bg-slate-100 text-slate-700 font-semibold rounded-xl hover:bg-slate-200 transition-colors flex items-center justify-center">

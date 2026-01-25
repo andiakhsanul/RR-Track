@@ -40,9 +40,9 @@
     <div class="lg:col-span-2 space-y-6">
         <!-- Info Laporan -->
         <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-            <div class="px-6 py-4 border-b border-slate-100 bg-gradient-to-r from-blue-50 to-cyan-50">
+            <div class="px-6 py-4 border-b border-slate-100 bg-gradient-to-r from-teal-50 to-cyan-50">
                 <h2 class="text-lg font-semibold text-slate-800 flex items-center">
-                    <div class="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center mr-3">
+                    <div class="w-8 h-8 rounded-lg bg-teal-600 flex items-center justify-center mr-3">
                         <i class="fas fa-file-medical text-white text-sm"></i>
                     </div>
                     Informasi Laporan
@@ -57,7 +57,7 @@
                     <div class="p-4 bg-slate-50 rounded-xl">
                         <dt class="text-sm font-medium text-slate-500 mb-1">Jenis Laporan</dt>
                         <dd>
-                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-blue-100 text-blue-700">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-teal-100 text-blue-700">
                                 <i class="fas fa-sync-alt mr-2"></i> Repeat
                             </span>
                         </dd>

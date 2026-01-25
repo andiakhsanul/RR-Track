@@ -6,22 +6,20 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="flex items-center space-x-2">
-                        <svg class="h-8 w-8 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        <span class="font-bold text-xl text-gray-800">RR-Track</span>
+                        <img src="{{ asset('images/logo.png') }}" alt="RR-Track Logo" class="h-10 w-auto">
+                        <span class="font-bold text-xl text-teal-700">RR-Track</span>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <a href="{{ route('dashboard') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('dashboard') ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out">
+                    <a href="{{ route('dashboard') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('dashboard') ? 'border-teal-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out">
                         {{ __('Dashboard') }}
                     </a>
-                    <a href="{{ route('laporan.repeat.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('laporan.repeat.*') ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out">
+                    <a href="{{ route('laporan.repeat.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('laporan.repeat.*') ? 'border-teal-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out">
                         {{ __('Laporan Repeat') }}
                     </a>
-                    <a href="{{ route('laporan.reject.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('laporan.reject.*') ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out">
+                    <a href="{{ route('laporan.reject.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('laporan.reject.*') ? 'border-teal-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} text-sm font-medium leading-5 transition duration-150 ease-in-out">
                         {{ __('Laporan Reject') }}
                     </a>
                 </div>
@@ -66,13 +64,13 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <a href="{{ route('dashboard') }}" class="block pl-3 pr-4 py-2 border-l-4 {{ request()->routeIs('dashboard') ? 'border-blue-500 text-blue-700 bg-blue-50' : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300' }} text-base font-medium transition duration-150 ease-in-out">
+            <a href="{{ route('dashboard') }}" class="block pl-3 pr-4 py-2 border-l-4 {{ request()->routeIs('dashboard') ? 'border-teal-500 text-teal-700 bg-teal-50' : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300' }} text-base font-medium transition duration-150 ease-in-out">
                 {{ __('Dashboard') }}
             </a>
-            <a href="{{ route('laporan.repeat.index') }}" class="block pl-3 pr-4 py-2 border-l-4 {{ request()->routeIs('laporan.repeat.*') ? 'border-blue-500 text-blue-700 bg-blue-50' : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300' }} text-base font-medium transition duration-150 ease-in-out">
+            <a href="{{ route('laporan.repeat.index') }}" class="block pl-3 pr-4 py-2 border-l-4 {{ request()->routeIs('laporan.repeat.*') ? 'border-teal-500 text-teal-700 bg-teal-50' : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300' }} text-base font-medium transition duration-150 ease-in-out">
                 {{ __('Laporan Repeat') }}
             </a>
-            <a href="{{ route('laporan.reject.index') }}" class="block pl-3 pr-4 py-2 border-l-4 {{ request()->routeIs('laporan.reject.*') ? 'border-blue-500 text-blue-700 bg-blue-50' : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300' }} text-base font-medium transition duration-150 ease-in-out">
+            <a href="{{ route('laporan.reject.index') }}" class="block pl-3 pr-4 py-2 border-l-4 {{ request()->routeIs('laporan.reject.*') ? 'border-teal-500 text-teal-700 bg-teal-50' : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300' }} text-base font-medium transition duration-150 ease-in-out">
                 {{ __('Laporan Reject') }}
             </a>
         </div>
