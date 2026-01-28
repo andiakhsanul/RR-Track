@@ -81,6 +81,100 @@ class LaporanController extends Controller
     }
 
     /**
+     * Show the unified form for creating a new report (Repeat or Reject)
+     */
+    public function create(): View
+    {
+        $petugas = Petugas::orderBy('inisial')->get();
+        $modalitas = Modalitas::orderBy('nama_modalitas')->get();
+        $jenisPemeriksaan = JenisPemeriksaan::orderBy('nama_jenis_pemeriksaan')->get();
+        $faktorPenyebab = FaktorPenyebab::orderBy('nama_faktor')->get();
+        $jenisInsiden = JenisInsiden::orderBy('nama_insiden')->get();
+
+        return view('laporan.create', compact(
+            'petugas',
+            'modalitas',
+            'jenisPemeriksaan',
+            'faktorPenyebab',
+            'jenisInsiden'
+        ));
+    }
+
+    /**
+     * Store a newly created report (unified handler for both Repeat and Reject)
+     */
+    public function store(Request $request): RedirectResponse
+    {
+        // Base validation rules
+        $rules = [
+            'jenis_laporan' => 'required|in:repeat,reject',
+            'tanggal_pemeriksaan' => 'required|date',
+            'nama_pasien' => 'required|string|max:100',
+            'no_rm' => 'required|string|max:20',
+            'id_jenis_pemeriksaan' => 'required|exists:jenis_pemeriksaan,id_jenis_pemeriksaan',
+            'id_modalitas' => 'required|exists:modalitas,id_modalitas',
+            'id_petugas' => 'required|exists:petugas,id_petugas',
+            'insiden' => 'nullable|array',
+            'insiden.*' => 'exists:jenis_insiden,id_insiden',
+            'keterangan' => 'nullable|string',
+            'kesalahan_label' => 'nullable|boolean',
+            'insiden_reaksi_obat_kontras' => 'nullable|boolean',
+        ];
+
+        // Add faktor validation for reject type
+        if ($request->input('jenis_laporan') === 'reject') {
+            $rules['faktor'] = 'required|array|min:1';
+            $rules['faktor.*'] = 'exists:faktor_penyebab,id_faktor';
+        }
+
+        $validated = $request->validate($rules);
+
+        // Determine jenis laporan ID
+        $isReject = $validated['jenis_laporan'] === 'reject';
+        $jenisLaporanId = $isReject ? JenisLaporan::TOLAK : JenisLaporan::ULANG;
+
+        // Find or create pasien
+        $pasien = Pasien::firstOrCreate(
+            ['no_rm' => $validated['no_rm']],
+            ['nama_pasien' => $validated['nama_pasien']]
+        );
+
+        // Update nama pasien if different
+        if ($pasien->nama_pasien !== $validated['nama_pasien']) {
+            $pasien->update(['nama_pasien' => $validated['nama_pasien']]);
+        }
+
+        // Create laporan
+        $laporan = Laporan::create([
+            'id_jenis_laporan' => $jenisLaporanId,
+            'tanggal_pemeriksaan' => $validated['tanggal_pemeriksaan'],
+            'id_pasien' => $pasien->id_pasien,
+            'id_jenis_pemeriksaan' => $validated['id_jenis_pemeriksaan'],
+            'id_modalitas' => $validated['id_modalitas'],
+            'id_petugas' => $validated['id_petugas'],
+            'keterangan' => $validated['keterangan'] ?? null,
+            'kesalahan_label' => $request->boolean('kesalahan_label'),
+            'insiden_reaksi_obat_kontras' => $request->boolean('insiden_reaksi_obat_kontras'),
+        ]);
+
+        // Attach faktor penyebab for reject type
+        if ($isReject && !empty($validated['faktor'])) {
+            $laporan->faktorPenyebab()->attach($validated['faktor']);
+        }
+
+        // Attach insiden
+        if (!empty($validated['insiden'])) {
+            $laporan->jenisInsiden()->attach($validated['insiden']);
+        }
+
+        // Redirect based on type
+        $route = $isReject ? 'laporan.reject.index' : 'laporan.repeat.index';
+        $message = $isReject ? 'Laporan Reject berhasil ditambahkan!' : 'Laporan Repeat berhasil ditambahkan!';
+
+        return redirect()->route($route)->with('success', $message);
+    }
+
+    /**
      * Store a newly created repeat report
      */
     public function storeRepeat(Request $request): RedirectResponse

@@ -28,6 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Unified Laporan Routes (must be before repeat/reject routes)
+    Route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create');
+    Route::post('/laporan', [LaporanController::class, 'store'])->name('laporan.store');
+
     // Laporan Repeat Routes
     Route::prefix('laporan/repeat')->name('laporan.repeat.')->group(function () {
         Route::get('/', [LaporanController::class, 'indexRepeat'])->name('index');
@@ -52,4 +56,4 @@ Route::middleware('auth')->group(function () {
 });
 
 // Auth Routes (from Breeze)
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
