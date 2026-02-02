@@ -5,9 +5,9 @@
 
 @section('content')
     <div x-data="{
-        jenisLaporan: '{{ old('jenis_laporan', request('jenis', 'repeat')) }}',
-        get isReject() { return this.jenisLaporan === 'reject' }
-    }">
+            jenisLaporan: '{{ old('jenis_laporan', request('jenis', 'repeat')) }}',
+            get isReject() { return this.jenisLaporan === 'reject' }
+        }">
         <!-- Header -->
         <div class="mb-8">
             <nav class="flex items-center space-x-2 text-sm text-slate-500 mb-4">
@@ -43,8 +43,8 @@
                                     <input type="radio" name="jenis_laporan" value="repeat" x-model="jenisLaporan"
                                         class="sr-only peer">
                                     <div class="p-5 rounded-xl border-2 border-slate-200 transition-all
-                                                peer-checked:border-teal-500 peer-checked:bg-teal-50
-                                                hover:border-teal-300 hover:bg-teal-50/50">
+                                                    peer-checked:border-teal-500 peer-checked:bg-teal-50
+                                                    hover:border-teal-300 hover:bg-teal-50/50">
                                         <div class="flex items-center">
                                             <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4 transition-colors"
                                                 :class="jenisLaporan === 'repeat' ? 'bg-teal-500' : 'bg-slate-200'">
@@ -52,7 +52,8 @@
                                                     :class="jenisLaporan === 'repeat' ? 'text-white' : 'text-slate-500'"></i>
                                             </div>
                                             <div>
-                                                <h3 class="font-semibold text-slate-800">Laporan Repeat</h3>
+                                                <h3 class="font-semibold text-slate-800">Laporan Repeat Film / Pemeriksaan
+                                                    Ulang</h3>
                                                 <p class="text-sm text-slate-500">Pemeriksaan yang perlu diulang</p>
                                             </div>
                                         </div>
@@ -64,8 +65,8 @@
                                     <input type="radio" name="jenis_laporan" value="reject" x-model="jenisLaporan"
                                         class="sr-only peer">
                                     <div class="p-5 rounded-xl border-2 border-slate-200 transition-all
-                                                peer-checked:border-red-500 peer-checked:bg-red-50
-                                                hover:border-red-300 hover:bg-red-50/50">
+                                                    peer-checked:border-red-500 peer-checked:bg-red-50
+                                                    hover:border-red-300 hover:bg-red-50/50">
                                         <div class="flex items-center">
                                             <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4 transition-colors"
                                                 :class="jenisLaporan === 'reject' ? 'bg-red-500' : 'bg-slate-200'">
@@ -156,7 +157,8 @@
                                             <option value="">Pilih Jenis Pemeriksaan</option>
                                             @foreach($jenisPemeriksaan as $jp)
                                                 <option value="{{ $jp->id_jenis_pemeriksaan }}" {{ old('id_jenis_pemeriksaan') == $jp->id_jenis_pemeriksaan ? 'selected' : '' }}>
-                                                    {{ $jp->nama_jenis_pemeriksaan }}</option>
+                                                    {{ $jp->nama_jenis_pemeriksaan }}
+                                                </option>
                                             @endforeach
                                         </select>
                                         <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
