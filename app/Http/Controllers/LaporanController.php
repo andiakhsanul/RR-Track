@@ -13,6 +13,8 @@ use App\Models\JenisPemeriksaan;
 use App\Models\JenisLaporan;
 use App\Models\FaktorPenyebab;
 use App\Models\JenisInsiden;
+use App\Exports\LaporanRepeatRejectExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanController extends Controller
 {
@@ -460,5 +462,52 @@ class LaporanController extends Controller
 
         return redirect()->route($route)
             ->with('success', 'Laporan berhasil dihapus!');
+    }
+
+    /**
+     * Show form for export Excel
+     */
+    public function exportForm(): View
+    {
+        return view('laporan.export');
+    }
+
+    /**
+     * Export laporan to Excel
+     */
+    public function exportExcel(Request $request)
+    {
+        $validated = $request->validate([
+            'bulan' => 'required|integer|min:1|max:12',
+            'tahun' => 'required|integer|min:2020|max:2100',
+            'tanggal_awal' => 'nullable|date',
+            'tanggal_akhir' => 'nullable|date|after_or_equal:tanggal_awal',
+            'modalitas' => 'required|in:all,ct_scan,x_ray',
+        ]);
+
+        $bulan = $validated['bulan'];
+        $tahun = $validated['tahun'];
+        $tanggalAwal = $validated['tanggal_awal'] ?? null;
+        $tanggalAkhir = $validated['tanggal_akhir'] ?? null;
+        $modalitas = $validated['modalitas'];
+
+        $namaBulan = [
+            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
+            5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
+            9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        ];
+
+        $modalitasLabel = match($modalitas) {
+            'ct_scan' => '_CT_Scan',
+            'x_ray' => '_X_Ray',
+            default => '',
+        };
+
+        $filename = "Laporan_Repeat_Reject{$modalitasLabel}_{$namaBulan[$bulan]}_{$tahun}.xlsx";
+
+        return Excel::download(
+            new LaporanRepeatRejectExport($bulan, $tahun, $tanggalAwal, $tanggalAkhir, $modalitas),
+            $filename
+        );
     }
 }

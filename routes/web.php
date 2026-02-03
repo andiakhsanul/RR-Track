@@ -32,6 +32,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create');
     Route::post('/laporan', [LaporanController::class, 'store'])->name('laporan.store');
 
+    // Export Laporan Routes
+    Route::get('/laporan/export', [LaporanController::class, 'exportForm'])->name('laporan.export.form');
+    Route::post('/laporan/export', [LaporanController::class, 'exportExcel'])->name('laporan.export');
+
     // Laporan Repeat Routes
     Route::prefix('laporan/repeat')->name('laporan.repeat.')->group(function () {
         Route::get('/', [LaporanController::class, 'indexRepeat'])->name('index');

@@ -50,6 +50,11 @@
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     {{ __('Laporan Reject') }}
                                 </a>
+                                <hr class="my-1 border-gray-200">
+                                <a href="{{ route('laporan.export.form') }}"
+                                    class="block px-4 py-2 text-sm text-emerald-600 hover:bg-emerald-50 font-medium">
+                                    <i class="fas fa-file-excel mr-2"></i>{{ __('Export Excel') }}
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -122,6 +127,10 @@
             <a href="{{ route('laporan.reject.index') }}"
                 class="block pl-6 pr-4 py-2 border-l-4 {{ request()->routeIs('laporan.reject.*') ? 'border-teal-500 text-teal-700 bg-teal-50' : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300' }} text-base font-medium transition duration-150 ease-in-out">
                 - {{ __('Laporan Reject') }}
+            </a>
+            <a href="{{ route('laporan.export.form') }}"
+                class="block pl-6 pr-4 py-2 border-l-4 {{ request()->routeIs('laporan.export.*') ? 'border-emerald-500 text-emerald-700 bg-emerald-50' : 'border-transparent text-emerald-600 hover:text-emerald-800 hover:bg-emerald-50 hover:border-emerald-300' }} text-base font-medium transition duration-150 ease-in-out">
+                <i class="fas fa-file-excel mr-2"></i>{{ __('Export Excel') }}
             </a>
         </div>
 
