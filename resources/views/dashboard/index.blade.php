@@ -92,7 +92,7 @@
     </div>
 
     <!-- Quick Actions -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <a href="{{ route('laporan.repeat.create') }}"
             class="group relative overflow-hidden bg-gradient-to-r from-cyan-500 to-cyan-600 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
             <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
@@ -126,7 +126,7 @@
             <i
                 class="fas fa-arrow-right absolute right-6 top-1/2 -translate-y-1/2 text-white/50 group-hover:text-white group-hover:translate-x-2 transition-all duration-300"></i>
         </a>
-    </div>
+    </div> -->
 
 
     <br>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,18 +38,41 @@
         }
     </script>
 </head>
-<body class="font-sans antialiased bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900 min-h-screen">
+
+<body class="font-sans antialiased bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900 min-h-screen relative">
+
+    {{-- Top Bar: Logo Unair (kiri) & Logo Vokasi (kanan) --}}
+    <div class="absolute top-0 left-0 right-0 flex items-center justify-between px-8 py-6 z-10">
+        {{-- Logo Unair - Kiri Atas --}}
+        <div class="bg-white rounded-xl px-5 py-3 shadow-lg flex flex-col items-center">
+            <img src="{{ asset('images/LogoUnair.png') }}" alt="Logo Universitas Airlangga" class="h-20 w-auto">
+            <span class="text-slate-700 text-xs font-semibold mt-2 tracking-wide">Universitas Airlangga</span>
+        </div>
+        {{-- Logo Vokasi - Kanan Atas --}}
+        <div class="bg-white rounded-xl px-5 py-3 shadow-lg flex flex-col items-center">
+            <img src="{{ asset('images/Logovokasi.jpg') }}" alt="Logo Vokasi" class="h-20 w-auto rounded-lg">
+            <span class="text-slate-700 text-xs font-semibold mt-2 tracking-wide">Fakultas Vokasi</span>
+        </div>
+    </div>
+
     <div class="min-h-screen flex items-center justify-center p-4">
         <div class="w-full max-w-md">
-            <!-- Logo & Title -->
-            <div class="text-center mb-8">
-                <div class="inline-flex items-center justify-center mb-4">
-                    <img src="{{ asset('images/logo.png') }}" alt="RR-Track Logo" class="h-24 w-auto">
-                </div>
-                <p class="text-teal-200 mt-2">Sistem Monitoring Reject & Repeat</p>
+            {{-- Logo Section: RS Logo (kiri) + logo.png (bulat, kanan) --}}
+            <div class="flex items-center justify-center space-x-5 mb-8">
+                {{-- Logo RS --}}
+                <img src="{{ asset('images/LogoRsudBangkalan.jpg') }}" alt="Logo RSUD Bangkalan"
+                    class="h-20 w-auto rounded-xl shadow-lg border-2 border-white/20">
+                {{-- Logo RR-Track (bulat) --}}
+                <img src="{{ asset('images/logo.png') }}" alt="RR-Track Logo"
+                    class="h-20 w-20 rounded-full shadow-lg border-2 border-white/20 object-cover">
             </div>
 
-            <!-- Login Card -->
+            {{-- Subtitle --}}
+            <div class="text-center mb-6">
+                <p class="text-teal-200 text-sm">Sistem Monitoring Reject & Repeat</p>
+            </div>
+
+            {{-- Login Card --}}
             <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
                 <div class="bg-gradient-to-r from-teal-600 to-teal-700 px-6 py-4">
                     <h2 class="text-xl font-semibold text-white flex items-center">
@@ -58,7 +82,7 @@
                 </div>
 
                 <div class="p-6">
-                    <!-- Session Status -->
+                    {{-- Session Status --}}
                     @if (session('status'))
                         <div class="mb-4 p-4 bg-green-50 border border-green-200 text-green-700 rounded-xl">
                             {{ session('status') }}
@@ -68,57 +92,56 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <!-- Email Address -->
+                        {{-- Email Address --}}
                         <div class="mb-5">
                             <label for="email" class="block text-sm font-medium text-slate-700 mb-2">
                                 <i class="fas fa-envelope mr-2 text-slate-400"></i>Email
                             </label>
                             <input id="email" type="email" name="email" value="{{ old('email') }}"
-                                   class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-teal-500 focus:bg-white transition-all @error('email') border-red-500 @enderror"
-                                   placeholder="Masukkan email Anda"
-                                   required autofocus autocomplete="username">
+                                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-teal-500 focus:bg-white transition-all @error('email') border-red-500 @enderror"
+                                placeholder="Masukkan email Anda" required autofocus autocomplete="username">
                             @error('email')
                                 <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <!-- Password -->
+                        {{-- Password --}}
                         <div class="mb-5">
                             <label for="password" class="block text-sm font-medium text-slate-700 mb-2">
                                 <i class="fas fa-lock mr-2 text-slate-400"></i>Password
                             </label>
                             <input id="password" type="password" name="password"
-                                   class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-teal-500 focus:bg-white transition-all @error('password') border-red-500 @enderror"
-                                   placeholder="Masukkan password"
-                                   required autocomplete="current-password">
+                                class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-teal-500 focus:bg-white transition-all @error('password') border-red-500 @enderror"
+                                placeholder="Masukkan password" required autocomplete="current-password">
                             @error('password')
                                 <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <!-- Remember Me -->
+                        {{-- Remember Me --}}
                         <div class="mb-6">
                             <label for="remember_me" class="inline-flex items-center cursor-pointer">
                                 <input id="remember_me" type="checkbox" name="remember"
-                                       class="w-5 h-5 rounded border-slate-300 text-teal-600 focus:ring-teal-500">
+                                    class="w-5 h-5 rounded border-slate-300 text-teal-600 focus:ring-teal-500">
                                 <span class="ml-3 text-sm text-slate-600">Ingat saya</span>
                             </label>
                         </div>
 
-                        <!-- Submit Button -->
+                        {{-- Submit Button --}}
                         <button type="submit"
-                                class="w-full py-3 px-6 bg-gradient-to-r from-teal-600 to-teal-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+                            class="w-full py-3 px-6 bg-gradient-to-r from-teal-600 to-teal-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
                             <i class="fas fa-sign-in-alt mr-2"></i> Masuk
                         </button>
                     </form>
                 </div>
             </div>
 
-            <!-- Footer -->
+            {{-- Footer --}}
             <div class="text-center mt-8 text-teal-200 text-sm">
-                <p>&copy; {{ date('Y') }} RR-Track. Radiologi Management System.</p>
+                <p>&copy; {{ date('Y') }} Teknologi Radiologi Pencitraan Universitas Airlangga.</p>
             </div>
         </div>
     </div>
 </body>
+
 </html>

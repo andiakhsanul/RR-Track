@@ -21,12 +21,19 @@ class LaporanController extends Controller
     /**
      * Display a listing of repeat reports
      */
-    public function indexRepeat(): View
+    public function indexRepeat(Request $request): View
     {
-        $laporanList = Laporan::with(['pasien', 'petugas', 'modalitas', 'jenisPemeriksaan', 'jenisInsiden'])
-            ->repeat()
-            ->orderBy('created_at', 'desc')
-            ->paginate(15);
+        $query = Laporan::with(['pasien', 'petugas', 'modalitas', 'jenisPemeriksaan', 'jenisInsiden'])
+            ->repeat();
+
+        if ($request->filled('tanggal_mulai')) {
+            $query->whereDate('tanggal_pemeriksaan', '>=', $request->tanggal_mulai);
+        }
+        if ($request->filled('tanggal_selesai')) {
+            $query->whereDate('tanggal_pemeriksaan', '<=', $request->tanggal_selesai);
+        }
+
+        $laporanList = $query->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
 
         return view('laporan.repeat.index', compact('laporanList'));
     }
@@ -34,12 +41,19 @@ class LaporanController extends Controller
     /**
      * Display a listing of reject reports
      */
-    public function indexReject(): View
+    public function indexReject(Request $request): View
     {
-        $laporanList = Laporan::with(['pasien', 'petugas', 'modalitas', 'jenisPemeriksaan', 'faktorPenyebab', 'jenisInsiden'])
-            ->reject()
-            ->orderBy('created_at', 'desc')
-            ->paginate(15);
+        $query = Laporan::with(['pasien', 'petugas', 'modalitas', 'jenisPemeriksaan', 'faktorPenyebab', 'jenisInsiden'])
+            ->reject();
+
+        if ($request->filled('tanggal_mulai')) {
+            $query->whereDate('tanggal_pemeriksaan', '>=', $request->tanggal_mulai);
+        }
+        if ($request->filled('tanggal_selesai')) {
+            $query->whereDate('tanggal_pemeriksaan', '<=', $request->tanggal_selesai);
+        }
+
+        $laporanList = $query->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
 
         return view('laporan.reject.index', compact('laporanList'));
     }
@@ -492,12 +506,21 @@ class LaporanController extends Controller
         $modalitas = $validated['modalitas'];
 
         $namaBulan = [
-            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
-            5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
-            9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+            1 => 'Januari',
+            2 => 'Februari',
+            3 => 'Maret',
+            4 => 'April',
+            5 => 'Mei',
+            6 => 'Juni',
+            7 => 'Juli',
+            8 => 'Agustus',
+            9 => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember'
         ];
 
-        $modalitasLabel = match($modalitas) {
+        $modalitasLabel = match ($modalitas) {
             'ct_scan' => '_CT_Scan',
             'x_ray' => '_X_Ray',
             default => '',

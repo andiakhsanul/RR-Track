@@ -5,9 +5,9 @@
 
 @section('content')
     <div x-data="{
-            jenisLaporan: '{{ old('jenis_laporan', request('jenis', 'repeat')) }}',
-            get isReject() { return this.jenisLaporan === 'reject' }
-        }">
+                jenisLaporan: '{{ old('jenis_laporan', request('jenis', 'repeat')) }}',
+                get isReject() { return this.jenisLaporan === 'reject' }
+            }">
         <!-- Header -->
         <div class="mb-8">
             <nav class="flex items-center space-x-2 text-sm text-slate-500 mb-4">
@@ -16,7 +16,7 @@
                 <span class="text-slate-800 font-medium">Tambah Laporan</span>
             </nav>
             <h1 class="text-2xl font-display font-bold text-slate-800">Tambah Laporan Baru</h1>
-            <p class="text-slate-500 mt-1">Isi formulir di bawah untuk membuat laporan pemeriksaan</p>
+            <p class="text-slate-500 mt-1">Isi formulir di bawah untuk membuat laporan kejadian</p>
         </div>
 
         <!-- Form Card -->
@@ -43,8 +43,8 @@
                                     <input type="radio" name="jenis_laporan" value="repeat" x-model="jenisLaporan"
                                         class="sr-only peer">
                                     <div class="p-5 rounded-xl border-2 border-slate-200 transition-all
-                                                    peer-checked:border-teal-500 peer-checked:bg-teal-50
-                                                    hover:border-teal-300 hover:bg-teal-50/50">
+                                                        peer-checked:border-teal-500 peer-checked:bg-teal-50
+                                                        hover:border-teal-300 hover:bg-teal-50/50">
                                         <div class="flex items-center">
                                             <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4 transition-colors"
                                                 :class="jenisLaporan === 'repeat' ? 'bg-teal-500' : 'bg-slate-200'">
@@ -65,8 +65,8 @@
                                     <input type="radio" name="jenis_laporan" value="reject" x-model="jenisLaporan"
                                         class="sr-only peer">
                                     <div class="p-5 rounded-xl border-2 border-slate-200 transition-all
-                                                    peer-checked:border-red-500 peer-checked:bg-red-50
-                                                    hover:border-red-300 hover:bg-red-50/50">
+                                                        peer-checked:border-red-500 peer-checked:bg-red-50
+                                                        hover:border-red-300 hover:bg-red-50/50">
                                         <div class="flex items-center">
                                             <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4 transition-colors"
                                                 :class="jenisLaporan === 'reject' ? 'bg-red-500' : 'bg-slate-200'">
@@ -338,10 +338,10 @@
                     </div>
 
                     <!-- Submit Buttons (Mobile) -->
-                    <div class="xl:hidden flex space-x-4">
-                        <a href="{{ url()->previous() }}"
+                    <div class="xl:hidden flex flex-wrap gap-3">
+                        <a href="{{ route('dashboard') }}"
                             class="flex-1 py-3 px-6 bg-slate-100 text-slate-700 font-semibold rounded-xl text-center hover:bg-slate-200 transition-all">
-                            <i class="fas fa-times mr-2"></i> Batal
+                            <i class="fas fa-home mr-2"></i> Dashboard
                         </a>
                         <button type="submit"
                             class="flex-1 py-3 px-6 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
@@ -406,9 +406,9 @@
                                 :class="isReject ? 'bg-gradient-to-r from-red-500 to-red-600' : 'bg-gradient-to-r from-teal-500 to-teal-600'">
                                 <i class="fas fa-save mr-2"></i> Simpan Laporan
                             </button>
-                            <a href="{{ url()->previous() }}"
+                            <a href="{{ route('dashboard') }}"
                                 class="w-full py-3 px-6 bg-slate-100 text-slate-700 font-semibold rounded-xl text-center hover:bg-slate-200 transition-all block">
-                                <i class="fas fa-arrow-left mr-2"></i> Kembali
+                                <i class="fas fa-home mr-2"></i> Dashboard
                             </a>
                         </div>
                     </div>

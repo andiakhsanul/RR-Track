@@ -8,13 +8,20 @@
     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
         <div>
             <h1 class="text-2xl font-display font-bold text-slate-800 mb-1">Daftar Laporan Reject</h1>
-            <p class="text-slate-500">Kelola semua laporan pemeriksaan yang ditolak</p>
+            <p class="text-slate-500">Kelola semua laporan kejadian yang ditolak</p>
         </div>
-        <a href="{{ route('laporan.create', ['jenis' => 'reject']) }}"
-            class="mt-4 md:mt-0 inline-flex items-center px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
-            <i class="fas fa-plus mr-2"></i>
-            Tambah Laporan
-        </a>
+        <div class="flex flex-wrap gap-3 mt-4 md:mt-0">
+            <a href="{{ route('dashboard') }}"
+                class="inline-flex items-center px-5 py-3 bg-slate-100 text-slate-700 font-semibold rounded-xl hover:bg-slate-200 transition-all">
+                <i class="fas fa-home mr-2"></i>
+                Dashboard
+            </a>
+            <!-- <a href="{{ route('laporan.create', ['jenis' => 'reject']) }}"
+                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+                    <i class="fas fa-plus mr-2"></i>
+                    Tambah Laporan
+                </a> -->
+        </div>
     </div>
 
     <!-- Stats Mini Cards -->
@@ -37,7 +44,8 @@
                 </div>
                 <div>
                     <p class="text-2xl font-bold text-slate-800">
-                        {{ $laporanList->where('created_at', '>=', now()->startOfMonth())->count() }}</p>
+                        {{ $laporanList->where('created_at', '>=', now()->startOfMonth())->count() }}
+                    </p>
                     <p class="text-sm text-slate-500">Bulan Ini</p>
                 </div>
             </div>
@@ -49,7 +57,8 @@
                 </div>
                 <div>
                     <p class="text-2xl font-bold text-slate-800">
-                        {{ $laporanList->where('created_at', '>=', now()->startOfWeek())->count() }}</p>
+                        {{ $laporanList->where('created_at', '>=', now()->startOfWeek())->count() }}
+                    </p>
                     <p class="text-sm text-slate-500">Minggu Ini</p>
                 </div>
             </div>
@@ -58,21 +67,36 @@
 
     <!-- Table Card -->
     <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-        <!-- Search & Filter -->
+        <!-- Date Filter -->
         <div class="p-6 border-b border-slate-100">
-            <form action="{{ route('laporan.reject.index') }}" method="GET" class="flex flex-col md:flex-row gap-4">
-                <div class="flex-1 relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <i class="fas fa-search text-slate-400"></i>
-                    </div>
-                    <input type="text" name="search" value="{{ request('search') }}"
-                        placeholder="Cari nama pasien, no. RM, atau keterangan..."
-                        class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-red-500 focus:bg-white transition-all">
+            <form action="{{ route('laporan.reject.index') }}" method="GET"
+                class="flex flex-col md:flex-row md:items-end gap-4">
+                <div class="flex-1">
+                    <label class="block text-sm font-medium text-slate-600 mb-1.5">
+                        <i class="fas fa-calendar-alt mr-1 text-slate-400"></i> Tanggal Mulai
+                    </label>
+                    <input type="date" name="tanggal_mulai" value="{{ request('tanggal_mulai') }}"
+                        class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-red-500 focus:bg-white transition-all">
                 </div>
-                <button type="submit"
-                    class="px-6 py-3 bg-slate-800 text-white font-medium rounded-xl hover:bg-slate-700 transition-colors">
-                    <i class="fas fa-filter mr-2"></i> Filter
-                </button>
+                <div class="flex-1">
+                    <label class="block text-sm font-medium text-slate-600 mb-1.5">
+                        <i class="fas fa-calendar-alt mr-1 text-slate-400"></i> Tanggal Selesai
+                    </label>
+                    <input type="date" name="tanggal_selesai" value="{{ request('tanggal_selesai') }}"
+                        class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-red-500 focus:bg-white transition-all">
+                </div>
+                <div class="flex gap-2">
+                    <button type="submit"
+                        class="px-6 py-3 bg-slate-800 text-white font-medium rounded-xl hover:bg-slate-700 transition-colors">
+                        <i class="fas fa-filter mr-2"></i> Filter
+                    </button>
+                    @if(request('tanggal_mulai') || request('tanggal_selesai'))
+                        <a href="{{ route('laporan.reject.index') }}"
+                            class="px-4 py-3 bg-slate-100 text-slate-600 font-medium rounded-xl hover:bg-slate-200 transition-colors">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    @endif
+                </div>
             </form>
         </div>
 
@@ -108,7 +132,8 @@
                                     </div>
                                     <div>
                                         <p class="text-sm font-medium text-slate-800">
-                                            {{ $laporan->tanggal_pemeriksaan->format('d M Y') }}</p>
+                                            {{ $laporan->tanggal_pemeriksaan->format('d M Y') }}
+                                        </p>
                                         <p class="text-xs text-slate-500">{{ $laporan->created_at->format('H:i') }}</p>
                                     </div>
                                 </div>
@@ -123,7 +148,8 @@
                             <td class="px-6 py-4">
                                 <div>
                                     <p class="text-sm font-medium text-slate-800">
-                                        {{ $laporan->jenisPemeriksaan->nama_jenis_pemeriksaan ?? '-' }}</p>
+                                        {{ $laporan->jenisPemeriksaan->nama_jenis_pemeriksaan ?? '-' }}
+                                    </p>
                                     <span
                                         class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-cyan-100 text-cyan-700">
                                         {{ $laporan->modalitas->nama_modalitas ?? '-' }}
