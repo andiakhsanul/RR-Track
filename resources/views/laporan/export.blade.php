@@ -15,8 +15,8 @@
         </nav>
 
         {{-- Page Header --}}
-        <div class="mb-6">
-            <div class="flex items-center space-x-3 mb-1">
+        <div class="mb-6 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
                     <i class="fas fa-file-excel text-white text-lg"></i>
                 </div>
@@ -25,6 +25,10 @@
                     <p class="text-sm text-slate-500">Download data Repeat & Reject dalam format Excel</p>
                 </div>
             </div>
+            <a href="{{ route('dashboard') }}"
+                class="inline-flex items-center px-5 py-3 bg-slate-100 text-slate-700 font-semibold rounded-xl hover:bg-slate-200 transition-all">
+                <i class="fas fa-home mr-2"></i> Dashboard
+            </a>
         </div>
 
         {{-- Main Form Card --}}
