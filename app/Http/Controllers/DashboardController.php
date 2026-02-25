@@ -155,60 +155,52 @@ class DashboardController extends Controller
     }
 
     /**
-     * Get reject factors for specific modalitas grouped by month (last 6 months)
+     * Get reject factors for specific modalitas for current month only
      */
     private function getModalitasRejectFactorsData(string $modalitasName): array
     {
-        $result = [];
         $colors = ['#EF4444', '#F97316', '#EAB308', '#22C55E', '#3B82F6', '#8B5CF6', '#EC4899', '#6366F1'];
+        $date = Carbon::now();
 
-        // Loop for last 6 months (0 to 5)
-        for ($i = 0; $i < 6; $i++) {
-            $date = Carbon::now()->subMonths($i);
-            $monthKey = $date->translatedFormat('F Y');
+        // Get reject reports for current month and modalitas
+        $laporans = Laporan::reject()
+            ->whereHas('modalitas', function ($q) use ($modalitasName) {
+                $q->where('nama_modalitas', 'like', '%' . $modalitasName . '%');
+            })
+            ->whereYear('tanggal_pemeriksaan', $date->year)
+            ->whereMonth('tanggal_pemeriksaan', $date->month)
+            ->with('faktorPenyebab')
+            ->get();
 
-            // Get reject reports for this month and modalitas
-            $laporans = Laporan::reject()
-                ->whereHas('modalitas', function ($q) use ($modalitasName) {
-                    $q->where('nama_modalitas', 'like', '%' . $modalitasName . '%');
-                })
-                ->whereYear('tanggal_pemeriksaan', $date->year)
-                ->whereMonth('tanggal_pemeriksaan', $date->month)
-                ->with('faktorPenyebab')
-                ->get();
-
-            // Count factors
-            $factorCounts = [];
-            foreach ($laporans as $laporan) {
-                foreach ($laporan->faktorPenyebab as $faktor) {
-                    $name = $faktor->nama_faktor;
-                    if (!isset($factorCounts[$name])) {
-                        $factorCounts[$name] = 0;
-                    }
-                    $factorCounts[$name]++;
+        // Count factors
+        $factorCounts = [];
+        foreach ($laporans as $laporan) {
+            foreach ($laporan->faktorPenyebab as $faktor) {
+                $name = $faktor->nama_faktor;
+                if (!isset($factorCounts[$name])) {
+                    $factorCounts[$name] = 0;
                 }
-            }
-
-            // Sort by count desc
-            arsort($factorCounts);
-
-            // Handle empty data case
-            if (empty($factorCounts)) {
-                $result[$monthKey] = [
-                    'labels' => ['Tidak ada data'],
-                    'data' => [0],
-                    'colors' => ['#e5e7eb']
-                ];
-            } else {
-                $result[$monthKey] = [
-                    'labels' => array_keys($factorCounts),
-                    'data' => array_values($factorCounts),
-                    'colors' => array_slice($colors, 0, count($factorCounts))
-                ];
+                $factorCounts[$name]++;
             }
         }
 
-        return $result;
+        // Sort by count desc
+        arsort($factorCounts);
+
+        // Handle empty data case
+        if (empty($factorCounts)) {
+            return [
+                'labels' => ['Tidak ada data'],
+                'data' => [0],
+                'colors' => ['#e5e7eb']
+            ];
+        }
+
+        return [
+            'labels' => array_keys($factorCounts),
+            'data' => array_values($factorCounts),
+            'colors' => array_slice($colors, 0, count($factorCounts))
+        ];
     }
 
     /**

@@ -23,9 +23,7 @@
         <form action="{{ route('laporan.store') }}" method="POST" id="form-laporan">
             @csrf
 
-            <div class="grid grid-cols-1 xl:grid-cols-4 gap-6">
-                <!-- Main Form Column -->
-                <div class="xl:col-span-3 space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
                     <!-- Jenis Laporan Section -->
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
@@ -337,8 +335,8 @@
                         </div>
                     </div>
 
-                    <!-- Submit Buttons (Mobile) -->
-                    <div class="xl:hidden flex flex-wrap gap-3">
+                    <!-- Submit Buttons -->
+                    <div class="lg:col-span-2 flex flex-wrap gap-3">
                         <a href="{{ route('dashboard') }}"
                             class="flex-1 py-3 px-6 bg-slate-100 text-slate-700 font-semibold rounded-xl text-center hover:bg-slate-200 transition-all">
                             <i class="fas fa-home mr-2"></i> Dashboard
@@ -346,71 +344,8 @@
                         <button type="submit"
                             class="flex-1 py-3 px-6 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
                             :class="isReject ? 'bg-gradient-to-r from-red-500 to-red-600' : 'bg-gradient-to-r from-teal-500 to-teal-600'">
-                            <i class="fas fa-save mr-2"></i> Simpan
+                            <i class="fas fa-save mr-2"></i> Simpan Laporan
                         </button>
-                    </div>
-                </div>
-
-                <!-- Sidebar Column -->
-                <div class="xl:col-span-1">
-                    <div class="sticky top-8 space-y-6">
-                        <!-- Info Card -->
-                        <div class="rounded-2xl p-6 text-white shadow-lg transition-colors"
-                            :class="isReject ? 'bg-gradient-to-br from-red-500 to-red-600' : 'bg-gradient-to-br from-teal-500 to-teal-600'">
-                            <div class="flex items-center mb-4">
-                                <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center mr-4">
-                                    <i class="text-2xl" :class="isReject ? 'fas fa-times-circle' : 'fas fa-redo'"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold text-lg"
-                                        x-text="isReject ? 'Laporan Reject' : 'Laporan Repeat'"></h3>
-                                    <p class="text-white/80 text-sm"
-                                        x-text="isReject ? 'Pemeriksaan Ditolak' : 'Pemeriksaan Ulang'"></p>
-                                </div>
-                            </div>
-                            <p class="text-sm text-white/90 leading-relaxed"
-                                x-text="isReject ? 'Reject adalah pemeriksaan radiologi yang tidak dapat digunakan karena kualitas gambar tidak memenuhi standar diagnostik.' : 'Repeat adalah pemeriksaan radiologi yang perlu dilakukan ulang karena berbagai faktor.'">
-                            </p>
-                        </div>
-
-                        <!-- Tips Card -->
-                        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
-                            <h3 class="font-semibold text-slate-800 mb-4 flex items-center">
-                                <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
-                                Tips Pengisian
-                            </h3>
-                            <ul class="space-y-3 text-sm text-slate-600">
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mr-2 mt-0.5"></i>
-                                    <span>Pastikan No. RM sudah benar</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mr-2 mt-0.5"></i>
-                                    <span>Pilih modalitas yang sesuai</span>
-                                </li>
-                                <li class="flex items-start" x-show="isReject">
-                                    <i class="fas fa-check-circle text-green-500 mr-2 mt-0.5"></i>
-                                    <span>Pilih faktor penyebab yang sesuai</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mr-2 mt-0.5"></i>
-                                    <span>Tambahkan keterangan detail</span>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- Action Buttons (Desktop) -->
-                        <div class="hidden xl:block space-y-3">
-                            <button type="submit" form="form-laporan"
-                                class="w-full py-3 px-6 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
-                                :class="isReject ? 'bg-gradient-to-r from-red-500 to-red-600' : 'bg-gradient-to-r from-teal-500 to-teal-600'">
-                                <i class="fas fa-save mr-2"></i> Simpan Laporan
-                            </button>
-                            <a href="{{ route('dashboard') }}"
-                                class="w-full py-3 px-6 bg-slate-100 text-slate-700 font-semibold rounded-xl text-center hover:bg-slate-200 transition-all block">
-                                <i class="fas fa-home mr-2"></i> Dashboard
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>

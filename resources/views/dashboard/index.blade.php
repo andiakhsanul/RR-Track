@@ -93,40 +93,40 @@
 
     <!-- Quick Actions -->
     <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <a href="{{ route('laporan.repeat.create') }}"
-            class="group relative overflow-hidden bg-gradient-to-r from-cyan-500 to-cyan-600 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-            <div class="relative z-10 flex items-center space-x-4">
-                <div
-                    class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <i class="fas fa-plus text-2xl text-white"></i>
+            <a href="{{ route('laporan.repeat.create') }}"
+                class="group relative overflow-hidden bg-gradient-to-r from-cyan-500 to-cyan-600 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                <div class="relative z-10 flex items-center space-x-4">
+                    <div
+                        class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-plus text-2xl text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-display font-bold text-white">Tambah Laporan Repeat</h3>
+                        <p class="text-cyan-100">Buat laporan pemeriksaan ulang baru</p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-xl font-display font-bold text-white">Tambah Laporan Repeat</h3>
-                    <p class="text-cyan-100">Buat laporan pemeriksaan ulang baru</p>
-                </div>
-            </div>
-            <i
-                class="fas fa-arrow-right absolute right-6 top-1/2 -translate-y-1/2 text-white/50 group-hover:text-white group-hover:translate-x-2 transition-all duration-300"></i>
-        </a>
+                <i
+                    class="fas fa-arrow-right absolute right-6 top-1/2 -translate-y-1/2 text-white/50 group-hover:text-white group-hover:translate-x-2 transition-all duration-300"></i>
+            </a>
 
-        <a href="{{ route('laporan.reject.create') }}"
-            class="group relative overflow-hidden bg-gradient-to-r from-rose-500 to-rose-600 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-            <div class="relative z-10 flex items-center space-x-4">
-                <div
-                    class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <i class="fas fa-plus text-2xl text-white"></i>
+            <a href="{{ route('laporan.reject.create') }}"
+                class="group relative overflow-hidden bg-gradient-to-r from-rose-500 to-rose-600 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                <div class="relative z-10 flex items-center space-x-4">
+                    <div
+                        class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-plus text-2xl text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-display font-bold text-white">Tambah Laporan Reject</h3>
+                        <p class="text-rose-100">Buat laporan pemeriksaan ditolak baru</p>
+                    </div>
                 </div>
-                <div>
-                    <h3 class="text-xl font-display font-bold text-white">Tambah Laporan Reject</h3>
-                    <p class="text-rose-100">Buat laporan pemeriksaan ditolak baru</p>
-                </div>
-            </div>
-            <i
-                class="fas fa-arrow-right absolute right-6 top-1/2 -translate-y-1/2 text-white/50 group-hover:text-white group-hover:translate-x-2 transition-all duration-300"></i>
-        </a>
-    </div> -->
+                <i
+                    class="fas fa-arrow-right absolute right-6 top-1/2 -translate-y-1/2 text-white/50 group-hover:text-white group-hover:translate-x-2 transition-all duration-300"></i>
+            </a>
+        </div> -->
 
 
     <br>
@@ -173,38 +173,32 @@
         <div class="space-y-6">
             <h3 class="text-xl font-display font-bold text-slate-800">Analisis Faktor Penyebab Reject</h3>
 
-            <!-- X-Ray Factors Filterable -->
+            <!-- X-Ray Factors - Current Month -->
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
                     <div>
                         <h3 class="text-lg font-display font-bold text-slate-800">Penyebab Reject X-Ray</h3>
-                        <p class="text-sm text-slate-500">Filter berdasarkan bulan</p>
+                        <p class="text-sm text-slate-500">{{ now()->translatedFormat('F Y') }}</p>
                     </div>
-                    <select id="filterMonthXRay"
-                        class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-teal-500 transition-colors">
-                        @foreach($chartFaktorXRay as $month => $data)
-                            <option value="{{ $month }}">{{ $month }}</option>
-                        @endforeach
-                    </select>
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+                        <i class="fas fa-x-ray text-blue-500"></i>
+                    </div>
                 </div>
                 <div class="h-80 flex items-center justify-center">
                     <canvas id="chartFaktorXRay"></canvas>
                 </div>
             </div>
 
-            <!-- CT-Scan Factors Filterable -->
+            <!-- CT-Scan Factors - Current Month -->
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
                     <div>
                         <h3 class="text-lg font-display font-bold text-slate-800">Penyebab Reject CT-Scan</h3>
-                        <p class="text-sm text-slate-500">Filter berdasarkan bulan</p>
+                        <p class="text-sm text-slate-500">{{ now()->translatedFormat('F Y') }}</p>
                     </div>
-                    <select id="filterMonthCTScan"
-                        class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-teal-500 transition-colors">
-                        @foreach($chartFaktorCTScan as $month => $data)
-                            <option value="{{ $month }}">{{ $month }}</option>
-                        @endforeach
-                    </select>
+                    <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center">
+                        <i class="fas fa-radiation text-indigo-500"></i>
+                    </div>
                 </div>
                 <div class="h-80 flex items-center justify-center">
                     <canvas id="chartFaktorCTScan"></canvas>
@@ -395,67 +389,52 @@
                 }
             });
 
-            // Filterable Charts (X-Ray & CT-Scan Causes)
+            // Doughnut Charts - Factor Penyebab (Current Month Only)
             try {
                 const factorDataXRay = {!! json_encode($chartFaktorXRay ?? []) !!};
                 const factorDataCTScan = {!! json_encode($chartFaktorCTScan ?? []) !!};
 
-                // Helper function to create/update doughnut chart
-                function createFactorChart(id, data) {
-                    const ctx = document.getElementById(id);
-                    if (!ctx) return null;
+                // X-Ray Factor Chart
+                initChart('chartFaktorXRay', {
+                    type: 'doughnut',
+                    data: {
+                        labels: factorDataXRay.labels || [],
+                        datasets: [{
+                            data: factorDataXRay.data || [],
+                            backgroundColor: factorDataXRay.colors || [],
+                            borderWidth: 0,
+                            hoverOffset: 10
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '60%',
+                        plugins: { legend: { position: 'bottom' } }
+                    }
+                });
 
-                    if (!data) return null;
-
-                    return new Chart(ctx, {
-                        type: 'doughnut',
-                        data: {
-                            labels: data.labels,
-                            datasets: [{
-                                data: data.data,
-                                backgroundColor: data.colors,
-                                borderWidth: 0,
-                                hoverOffset: 10
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            cutout: '60%',
-                            plugins: { legend: { position: 'bottom' } }
-                        }
-                    });
-                }
-
-                // Initialize X-Ray Factor Chart
-                const selectMonthXRay = document.getElementById('filterMonthXRay');
-                if (selectMonthXRay && factorDataXRay) {
-                    let currentChartXRay = createFactorChart('chartFaktorXRay', factorDataXRay[selectMonthXRay.value]);
-
-                    selectMonthXRay.addEventListener('change', function () {
-                        const month = this.value;
-                        if (factorDataXRay[month]) {
-                            if (currentChartXRay) currentChartXRay.destroy();
-                            currentChartXRay = createFactorChart('chartFaktorXRay', factorDataXRay[month]);
-                        }
-                    });
-                }
-
-                // Initialize CT-Scan Factor Chart
-                const selectMonthCTScan = document.getElementById('filterMonthCTScan');
-                if (selectMonthCTScan && factorDataCTScan) {
-                    let currentChartCTScan = createFactorChart('chartFaktorCTScan', factorDataCTScan[selectMonthCTScan.value]);
-
-                    selectMonthCTScan.addEventListener('change', function () {
-                        const month = this.value;
-                        if (factorDataCTScan[month]) {
-                            if (currentChartCTScan) currentChartCTScan.destroy();
-                            currentChartCTScan = createFactorChart('chartFaktorCTScan', factorDataCTScan[month]);
-                        }
-                    });
-                }
+                // CT-Scan Factor Chart
+                initChart('chartFaktorCTScan', {
+                    type: 'doughnut',
+                    data: {
+                        labels: factorDataCTScan.labels || [],
+                        datasets: [{
+                            data: factorDataCTScan.data || [],
+                            backgroundColor: factorDataCTScan.colors || [],
+                            borderWidth: 0,
+                            hoverOffset: 10
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '60%',
+                        plugins: { legend: { position: 'bottom' } }
+                    }
+                });
             } catch (e) {
-                console.error("Error initializing filterable charts:", e);
+                console.error("Error initializing factor charts:", e);
             }
         });
     </script>

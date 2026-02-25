@@ -479,6 +479,40 @@ class LaporanController extends Controller
     }
 
     /**
+     * Show consolidated pelaporan page (Export + Reject list + Repeat list)
+     */
+    public function pelaporan(Request $request): View
+    {
+        // Reject list
+        $rejectQuery = Laporan::with(['pasien', 'petugas', 'modalitas', 'jenisPemeriksaan', 'faktorPenyebab', 'jenisInsiden'])
+            ->reject();
+
+        if ($request->filled('reject_tanggal_mulai')) {
+            $rejectQuery->whereDate('tanggal_pemeriksaan', '>=', $request->reject_tanggal_mulai);
+        }
+        if ($request->filled('reject_tanggal_selesai')) {
+            $rejectQuery->whereDate('tanggal_pemeriksaan', '<=', $request->reject_tanggal_selesai);
+        }
+
+        $rejectList = $rejectQuery->orderBy('created_at', 'desc')->paginate(10, ['*'], 'reject_page')->withQueryString();
+
+        // Repeat list
+        $repeatQuery = Laporan::with(['pasien', 'petugas', 'modalitas', 'jenisPemeriksaan', 'jenisInsiden'])
+            ->repeat();
+
+        if ($request->filled('repeat_tanggal_mulai')) {
+            $repeatQuery->whereDate('tanggal_pemeriksaan', '>=', $request->repeat_tanggal_mulai);
+        }
+        if ($request->filled('repeat_tanggal_selesai')) {
+            $repeatQuery->whereDate('tanggal_pemeriksaan', '<=', $request->repeat_tanggal_selesai);
+        }
+
+        $repeatList = $repeatQuery->orderBy('created_at', 'desc')->paginate(10, ['*'], 'repeat_page')->withQueryString();
+
+        return view('laporan.pelaporan', compact('rejectList', 'repeatList'));
+    }
+
+    /**
      * Show form for export Excel
      */
     public function exportForm(): View
