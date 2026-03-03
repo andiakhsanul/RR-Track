@@ -235,10 +235,10 @@
         </div>
 
         <!-- Reject Table -->
-        <div class="overflow-x-auto">
+        <div class="overflow-auto max-h-[340px]">
             <table class="w-full">
-                <thead>
-                    <tr class="bg-slate-50">
+                <thead class="sticky top-0 z-10">
+                    <tr class="bg-slate-50 shadow-[0_1px_0_0_rgb(241,245,249)]">
                         <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">No
                         </th>
                         <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
@@ -402,10 +402,10 @@
         </div>
 
         <!-- Repeat Table -->
-        <div class="overflow-x-auto">
+        <div class="overflow-auto max-h-[340px]">
             <table class="w-full">
-                <thead>
-                    <tr class="bg-slate-50">
+                <thead class="sticky top-0 z-10">
+                    <tr class="bg-slate-50 shadow-[0_1px_0_0_rgb(241,245,249)]">
                         <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">No
                         </th>
                         <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">

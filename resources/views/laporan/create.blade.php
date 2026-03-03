@@ -198,47 +198,47 @@
 
                     <!-- Data Pasien Section -->
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                        <div class="bg-gradient-to-r from-green-500 to-green-600 px-6 py-4">
-                            <h2 class="text-lg font-semibold text-white flex items-center">
-                                <i class="fas fa-user-injured mr-3"></i>
+                        <div class="bg-gradient-to-r from-green-500 to-green-600 px-5 py-3">
+                            <h2 class="text-base font-semibold text-white flex items-center">
+                                <i class="fas fa-user-injured mr-2.5"></i>
                                 Data Pasien
                             </h2>
                         </div>
-                        <div class="p-6 space-y-5">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="p-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <!-- No RM -->
-                                <div class="space-y-2">
+                                <div class="space-y-1.5">
                                     <label class="block text-sm font-medium text-slate-700">
                                         No. Rekam Medis <span class="text-red-500">*</span>
                                     </label>
-                                    <div class="relative">
-                                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                            <i class="fas fa-id-card text-slate-400"></i>
+                                    <div class="relative max-w-[260px]">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <i class="fas fa-id-card text-slate-400 text-sm"></i>
                                         </div>
                                         <input type="text" name="no_rm" value="{{ old('no_rm') }}"
                                             placeholder="Masukkan No. RM"
-                                            class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-green-500 focus:bg-white transition-all @error('no_rm') border-red-500 @enderror">
+                                            class="w-full pl-10 pr-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-green-500 focus:bg-white transition-all @error('no_rm') border-red-500 @enderror">
                                     </div>
                                     @error('no_rm')
-                                        <p class="text-red-500 text-sm">{{ $message }}</p>
+                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <!-- Nama Pasien -->
-                                <div class="space-y-2">
+                                <div class="space-y-1.5">
                                     <label class="block text-sm font-medium text-slate-700">
                                         Nama Pasien <span class="text-red-500">*</span>
                                     </label>
-                                    <div class="relative">
-                                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                            <i class="fas fa-user text-slate-400"></i>
+                                    <div class="relative max-w-[260px]">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <i class="fas fa-user text-slate-400 text-sm"></i>
                                         </div>
                                         <input type="text" name="nama_pasien" value="{{ old('nama_pasien') }}"
                                             placeholder="Masukkan nama pasien"
-                                            class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-green-500 focus:bg-white transition-all @error('nama_pasien') border-red-500 @enderror">
+                                            class="w-full pl-10 pr-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-green-500 focus:bg-white transition-all @error('nama_pasien') border-red-500 @enderror">
                                     </div>
                                     @error('nama_pasien')
-                                        <p class="text-red-500 text-sm">{{ $message }}</p>
+                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -250,28 +250,28 @@
                         x-transition:enter-start="opacity-0 transform -translate-y-4"
                         x-transition:enter-end="opacity-100 transform translate-y-0"
                         class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                        <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-4">
-                            <h2 class="text-lg font-semibold text-white flex items-center">
-                                <i class="fas fa-exclamation-triangle mr-3"></i>
+                        <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-5 py-3">
+                            <h2 class="text-base font-semibold text-white flex items-center">
+                                <i class="fas fa-exclamation-triangle mr-2.5"></i>
                                 Faktor Penyebab Reject
                             </h2>
                         </div>
-                        <div class="p-6">
-                            <p class="text-sm text-slate-500 mb-4">Pilih satu atau lebih faktor penyebab reject:</p>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="p-5">
+                            <p class="text-xs text-slate-500 mb-3">Pilih satu atau lebih faktor penyebab reject:</p>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2.5">
                                 @foreach($faktorPenyebab as $faktor)
                                     <label
-                                        class="relative flex items-start p-4 bg-slate-50 rounded-xl border-2 border-transparent hover:border-orange-300 hover:bg-orange-50 cursor-pointer transition-all group">
+                                        class="relative flex items-center px-3 py-2.5 bg-slate-50 rounded-lg border border-slate-200 hover:border-orange-400 hover:bg-orange-50 cursor-pointer transition-all group">
                                         <input type="checkbox" name="faktor[]" value="{{ $faktor->id_faktor }}"
-                                            class="h-5 w-5 rounded border-slate-300 text-orange-600 focus:ring-orange-500 mt-0.5"
+                                            class="h-4 w-4 rounded border-slate-300 text-orange-600 focus:ring-orange-500 shrink-0"
                                             {{ in_array($faktor->id_faktor, old('faktor', [])) ? 'checked' : '' }}>
                                         <span
-                                            class="ml-3 text-sm text-slate-700 group-hover:text-slate-900">{{ $faktor->nama_faktor }}</span>
+                                            class="ml-2 text-xs font-medium text-slate-700 group-hover:text-slate-900 leading-tight">{{ $faktor->nama_faktor }}</span>
                                     </label>
                                 @endforeach
                             </div>
                             @error('faktor')
-                                <p class="text-red-500 text-sm mt-3">{{ $message }}</p>
+                                <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -336,11 +336,7 @@
                     </div>
 
                     <!-- Submit Buttons -->
-                    <div class="lg:col-span-2 flex flex-wrap gap-3">
-                        <a href="{{ route('dashboard') }}"
-                            class="flex-1 py-3 px-6 bg-slate-100 text-slate-700 font-semibold rounded-xl text-center hover:bg-slate-200 transition-all">
-                            <i class="fas fa-home mr-2"></i> Dashboard
-                        </a>
+                    <div class="lg:col-span-2 flex flex-wrap gap-2">
                         <button type="submit"
                             class="flex-1 py-3 px-6 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
                             :class="isReject ? 'bg-gradient-to-r from-red-500 to-red-600' : 'bg-gradient-to-r from-teal-500 to-teal-600'">

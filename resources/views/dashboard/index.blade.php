@@ -19,7 +19,7 @@
                 </p>
             </div>
             <div class="hidden lg:block">
-                <img src="{{ asset('images/logo.png') }}" alt="RR-Track Logo" class="h-24 w-auto opacity-90">
+                <img src="{{ asset('images/LogoRsudBangkalan.jpg') }}" alt="RR-Track Logo" class="h-24 w-auto opacity-90">
             </div>
         </div>
     </div>
@@ -93,40 +93,40 @@
 
     <!-- Quick Actions -->
     <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <a href="{{ route('laporan.repeat.create') }}"
-                class="group relative overflow-hidden bg-gradient-to-r from-cyan-500 to-cyan-600 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                <div class="relative z-10 flex items-center space-x-4">
-                    <div
-                        class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-plus text-2xl text-white"></i>
+                <a href="{{ route('laporan.repeat.create') }}"
+                    class="group relative overflow-hidden bg-gradient-to-r from-cyan-500 to-cyan-600 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="relative z-10 flex items-center space-x-4">
+                        <div
+                            class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-plus text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-white">Tambah Laporan Repeat</h3>
+                            <p class="text-cyan-100">Buat laporan pemeriksaan ulang baru</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-xl font-display font-bold text-white">Tambah Laporan Repeat</h3>
-                        <p class="text-cyan-100">Buat laporan pemeriksaan ulang baru</p>
-                    </div>
-                </div>
-                <i
-                    class="fas fa-arrow-right absolute right-6 top-1/2 -translate-y-1/2 text-white/50 group-hover:text-white group-hover:translate-x-2 transition-all duration-300"></i>
-            </a>
+                    <i
+                        class="fas fa-arrow-right absolute right-6 top-1/2 -translate-y-1/2 text-white/50 group-hover:text-white group-hover:translate-x-2 transition-all duration-300"></i>
+                </a>
 
-            <a href="{{ route('laporan.reject.create') }}"
-                class="group relative overflow-hidden bg-gradient-to-r from-rose-500 to-rose-600 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                <div class="relative z-10 flex items-center space-x-4">
-                    <div
-                        class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-plus text-2xl text-white"></i>
+                <a href="{{ route('laporan.reject.create') }}"
+                    class="group relative overflow-hidden bg-gradient-to-r from-rose-500 to-rose-600 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="relative z-10 flex items-center space-x-4">
+                        <div
+                            class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-plus text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-display font-bold text-white">Tambah Laporan Reject</h3>
+                            <p class="text-rose-100">Buat laporan pemeriksaan ditolak baru</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-xl font-display font-bold text-white">Tambah Laporan Reject</h3>
-                        <p class="text-rose-100">Buat laporan pemeriksaan ditolak baru</p>
-                    </div>
-                </div>
-                <i
-                    class="fas fa-arrow-right absolute right-6 top-1/2 -translate-y-1/2 text-white/50 group-hover:text-white group-hover:translate-x-2 transition-all duration-300"></i>
-            </a>
-        </div> -->
+                    <i
+                        class="fas fa-arrow-right absolute right-6 top-1/2 -translate-y-1/2 text-white/50 group-hover:text-white group-hover:translate-x-2 transition-all duration-300"></i>
+                </a>
+            </div> -->
 
 
     <br>
