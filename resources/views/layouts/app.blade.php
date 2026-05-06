@@ -13,7 +13,7 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
 
     <!-- TailwindCSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,6 +23,15 @@
                 extend: {
                     fontFamily: {
                         sans: ['Figtree', 'sans-serif'],
+                    },
+                    fontSize: {
+                        xs: ['0.82rem', { lineHeight: '1.18rem' }],
+                        sm: ['0.95rem', { lineHeight: '1.45rem' }],
+                        base: ['1.08rem', { lineHeight: '1.65rem' }],
+                        lg: ['1.2rem', { lineHeight: '1.8rem' }],
+                        xl: ['1.35rem', { lineHeight: '1.9rem' }],
+                        '2xl': ['1.65rem', { lineHeight: '2.05rem' }],
+                        '3xl': ['2rem', { lineHeight: '2.4rem' }],
                     },
                     colors: {
                         primary: {

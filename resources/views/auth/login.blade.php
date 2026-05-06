@@ -22,6 +22,15 @@
                     fontFamily: {
                         sans: ['Outfit', 'sans-serif'],
                     },
+                    fontSize: {
+                        xs: ['0.82rem', { lineHeight: '1.18rem' }],
+                        sm: ['0.95rem', { lineHeight: '1.45rem' }],
+                        base: ['1.08rem', { lineHeight: '1.65rem' }],
+                        lg: ['1.2rem', { lineHeight: '1.8rem' }],
+                        xl: ['1.35rem', { lineHeight: '1.9rem' }],
+                        '2xl': ['1.65rem', { lineHeight: '2.05rem' }],
+                        '3xl': ['2rem', { lineHeight: '2.4rem' }],
+                    },
                     colors: {
                         brand: {
                             300: '#5eead4',
@@ -107,7 +116,7 @@
 
                 <div class="px-5 py-7 sm:px-6">
                     <div class="mb-7 text-center">
-                        <h1 class="text-[28px] font-bold leading-tight tracking-normal text-white">Selamat Datang</h1>
+                        <h1 class="text-[31px] font-bold leading-tight tracking-normal text-white">Selamat Datang</h1>
                         <p class="mt-2 text-xs font-medium text-brand-500">Sistem Monitoring Reject &amp; Repeat</p>
                     </div>
 
