@@ -205,6 +205,24 @@
 
             const gradientColors = ['#14b8a6', '#0d9488', '#0f766e', '#115e59', '#134e4a', '#06b6d4', '#0891b2', '#0e7490'];
 
+            function factorChartOptions(details = []) {
+                return {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '60%',
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                afterLabel(context) {
+                                    return details[context.dataIndex] || '';
+                                }
+                            }
+                        }
+                    }
+                };
+            }
+
             // Helper to safely init charts
             function initChart(id, config) {
                 const ctx = document.getElementById(id);
@@ -367,12 +385,7 @@
                         hoverOffset: 10
                     }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '60%',
-                    plugins: { legend: { position: 'bottom' } }
-                }
+                options: factorChartOptions({!! json_encode($chartFaktor['details'] ?? []) !!})
             });
 
             // Doughnut Charts - Factor Penyebab (Current Month Only)
@@ -392,12 +405,7 @@
                             hoverOffset: 10
                         }]
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        cutout: '60%',
-                        plugins: { legend: { position: 'bottom' } }
-                    }
+                    options: factorChartOptions(factorDataXRay.details || [])
                 });
 
                 // CT-Scan Factor Chart
@@ -412,12 +420,7 @@
                             hoverOffset: 10
                         }]
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        cutout: '60%',
-                        plugins: { legend: { position: 'bottom' } }
-                    }
+                    options: factorChartOptions(factorDataCTScan.details || [])
                 });
             } catch (e) {
                 console.error("Error initializing factor charts:", e);

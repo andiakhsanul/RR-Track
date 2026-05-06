@@ -180,7 +180,7 @@
             </div>
 
             <!-- Faktor Penyebab Section -->
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden mb-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-visible mb-6">
                 <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-4">
                     <h2 class="text-lg font-semibold text-white flex items-center">
                         <i class="fas fa-exclamation-triangle mr-3"></i>
@@ -194,12 +194,11 @@
                     @endphp
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach($faktorPenyebab as $faktor)
-                            <label class="relative flex items-start p-4 bg-slate-50 rounded-xl border-2 {{ in_array($faktor->id_faktor, $selectedFaktors) ? 'border-red-400 bg-red-50' : 'border-transparent' }} hover:border-red-300 hover:bg-red-50 cursor-pointer transition-all group">
-                                <input type="checkbox" name="faktor[]" value="{{ $faktor->id_faktor }}"
-                                       class="h-5 w-5 rounded border-slate-300 text-red-600 focus:ring-red-500 mt-0.5"
-                                       {{ in_array($faktor->id_faktor, $selectedFaktors) ? 'checked' : '' }}>
-                                <span class="ml-3 text-sm text-slate-700 group-hover:text-slate-900">{{ $faktor->nama_faktor }}</span>
-                            </label>
+                            <x-faktor-option
+                                :faktor="$faktor"
+                                tone="red"
+                                :checked="in_array($faktor->id_faktor, $selectedFaktors)"
+                            />
                         @endforeach
                     </div>
                     @error('faktor')

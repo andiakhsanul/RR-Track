@@ -248,7 +248,7 @@
                     <div x-show="isReject" x-transition:enter="transition ease-out duration-300"
                         x-transition:enter-start="opacity-0 transform -translate-y-4"
                         x-transition:enter-end="opacity-100 transform translate-y-0"
-                        class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+                        class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-visible">
                         <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-5 py-3">
                             <h2 class="text-base font-semibold text-white flex items-center">
                                 <i class="fas fa-exclamation-triangle mr-2.5"></i>
@@ -259,14 +259,11 @@
                             <p class="text-xs text-slate-500 mb-3">Pilih satu atau lebih faktor penyebab reject:</p>
                             <div class="grid grid-cols-2 md:grid-cols-3 gap-2.5">
                                 @foreach($faktorPenyebab as $faktor)
-                                    <label
-                                        class="relative flex items-center px-3 py-2.5 bg-slate-50 rounded-lg border border-slate-200 hover:border-orange-400 hover:bg-orange-50 cursor-pointer transition-all group">
-                                        <input type="checkbox" name="faktor[]" value="{{ $faktor->id_faktor }}"
-                                            class="h-4 w-4 rounded border-slate-300 text-orange-600 focus:ring-orange-500 shrink-0"
-                                            {{ in_array($faktor->id_faktor, old('faktor', [])) ? 'checked' : '' }}>
-                                        <span
-                                            class="ml-2 text-xs font-medium text-slate-700 group-hover:text-slate-900 leading-tight">{{ $faktor->nama_faktor }}</span>
-                                    </label>
+                                    <x-faktor-option
+                                        :faktor="$faktor"
+                                        :checked="in_array($faktor->id_faktor, old('faktor', []))"
+                                        compact
+                                    />
                                 @endforeach
                             </div>
                             @error('faktor')

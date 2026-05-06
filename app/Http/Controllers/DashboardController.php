@@ -174,12 +174,14 @@ class DashboardController extends Controller
 
         // Count factors
         $factorCounts = [];
+        $factorDetails = [];
         foreach ($laporans as $laporan) {
             foreach ($laporan->faktorPenyebab as $faktor) {
-                $name = $faktor->nama_faktor;
+                $name = $faktor->nama_utama;
                 if (!isset($factorCounts[$name])) {
                     $factorCounts[$name] = 0;
                 }
+                $factorDetails[$name] = $faktor->detail;
                 $factorCounts[$name]++;
             }
         }
@@ -191,13 +193,17 @@ class DashboardController extends Controller
         if (empty($factorCounts)) {
             return [
                 'labels' => ['Tidak ada data'],
+                'details' => [null],
                 'data' => [0],
                 'colors' => ['#e5e7eb']
             ];
         }
 
+        $labels = array_keys($factorCounts);
+
         return [
-            'labels' => array_keys($factorCounts),
+            'labels' => $labels,
+            'details' => array_map(fn ($label) => $factorDetails[$label] ?? null, $labels),
             'data' => array_values($factorCounts),
             'colors' => array_slice($colors, 0, count($factorCounts))
         ];
@@ -226,7 +232,8 @@ class DashboardController extends Controller
         $colors = ['#EF4444', '#F97316', '#EAB308', '#22C55E', '#3B82F6', '#8B5CF6'];
 
         return [
-            'labels' => $faktorList->pluck('nama_faktor')->toArray(),
+            'labels' => $faktorList->map(fn ($faktor) => $faktor->nama_utama)->toArray(),
+            'details' => $faktorList->map(fn ($faktor) => $faktor->detail)->toArray(),
             'data' => $faktorList->pluck('laporan_count')->toArray(),
             'colors' => array_slice($colors, 0, $faktorList->count())
         ];

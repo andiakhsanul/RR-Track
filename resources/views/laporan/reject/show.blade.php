@@ -85,9 +85,10 @@
                 @if($laporan->faktorPenyebab->count() > 0)
                     <div class="flex flex-wrap gap-3">
                         @foreach($laporan->faktorPenyebab as $faktor)
-                            <span class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-50 to-rose-50 border border-red-200 text-red-700 rounded-xl font-medium">
+                            <span title="{{ $faktor->detail ?: $faktor->nama_utama }}"
+                                class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-50 to-rose-50 border border-red-200 text-red-700 rounded-xl font-medium">
                                 <i class="fas fa-times-circle mr-2 text-red-500"></i>
-                                {{ $faktor->nama_faktor }}
+                                {{ $faktor->nama_utama }}
                             </span>
                         @endforeach
                     </div>

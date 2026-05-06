@@ -17,6 +17,16 @@ class FaktorPenyebab extends Model
         'nama_faktor',
     ];
 
+    public function getNamaUtamaAttribute(): string
+    {
+        return $this->splitNamaFaktor()['utama'];
+    }
+
+    public function getDetailAttribute(): ?string
+    {
+        return $this->splitNamaFaktor()['detail'];
+    }
+
     /**
      * Get all laporan that have this faktor
      */
@@ -28,5 +38,27 @@ class FaktorPenyebab extends Model
             'id_faktor',
             'id_laporan'
         );
+    }
+
+    /**
+     * Split "Nama Utama (detail)" into a short display label and hover detail.
+     *
+     * @return array{utama: string, detail: string|null}
+     */
+    private function splitNamaFaktor(): array
+    {
+        $nama = trim((string) $this->nama_faktor);
+
+        if (preg_match('/^(.*?)\s*\((.*)\)\s*$/', $nama, $matches)) {
+            return [
+                'utama' => trim($matches[1]),
+                'detail' => trim($matches[2]) ?: null,
+            ];
+        }
+
+        return [
+            'utama' => $nama,
+            'detail' => null,
+        ];
     }
 }
