@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="flex items-center space-x-2">
-                        <img src="{{ asset('images/LogoRsudBangkalan.jpg') }}" alt="RR-Track Logo" class="h-10 w-auto">
+                        <img src="{{ asset('images/logo-rrtrack-login.png') }}" alt="RR-Track Logo" class="h-9 w-auto">
                         <span class="font-bold text-xl text-teal-700">RR-Track</span>
                     </a>
                 </div>

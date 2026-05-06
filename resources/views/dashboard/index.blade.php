@@ -5,24 +5,10 @@
 
 @section('content')
     <!-- Welcome Banner -->
-    <div
-        class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-teal-700 via-teal-600 to-teal-500 p-8 mb-8 shadow-xl">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-        <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-        <div class="relative z-10 flex items-center justify-between">
-            <div>
-                <h1 class="text-3xl font-display font-bold text-white mb-2">
-                    Selamat Datang, {{ Auth::user()->name ?? 'Admin' }}! 🎉
-                </h1>
-                <p class="text-teal-100 text-lg">
-                    Kelola laporan pemeriksaan radiologi dengan mudah dan efisien
-                </p>
-            </div>
-            <div class="hidden lg:block">
-                <img src="{{ asset('images/LogoRsudBangkalan.jpg') }}" alt="RR-Track Logo" class="h-24 w-auto opacity-90">
-            </div>
-        </div>
-    </div>
+    <x-page-hero
+        :title="'Selamat Datang, ' . (Auth::user()->name ?? 'Admin') . '!'"
+        subtitle="Kelola laporan pemeriksaan radiologi dengan mudah dan efisien"
+    />
 
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

@@ -9,15 +9,14 @@
                 get isReject() { return this.jenisLaporan === 'reject' }
             }">
         <!-- Header -->
-        <div class="mb-8">
-            <nav class="flex items-center space-x-2 text-sm text-slate-500 mb-4">
-                <a href="{{ route('dashboard') }}" class="hover:text-primary-600 transition-colors">Dashboard</a>
-                <i class="fas fa-chevron-right text-xs"></i>
-                <span class="text-slate-800 font-medium">Tambah Laporan</span>
-            </nav>
-            <h1 class="text-2xl font-display font-bold text-slate-800">Tambah Laporan Baru</h1>
-            <p class="text-slate-500 mt-1">Isi formulir di bawah untuk membuat laporan kejadian</p>
-        </div>
+        <x-page-hero
+            title="Tambah Laporan Baru"
+            subtitle="Isi formulir di bawah untuk membuat laporan kejadian"
+            :breadcrumbs="[
+                ['label' => 'Dashboard', 'url' => route('dashboard')],
+                ['label' => 'Input'],
+            ]"
+        />
 
         <!-- Form Card -->
         <form action="{{ route('laporan.store') }}" method="POST" id="form-laporan">

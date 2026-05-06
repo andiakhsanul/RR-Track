@@ -5,10 +5,15 @@
 
 @section('content')
     <!-- Page Header -->
-    <div class="mb-8">
-        <h1 class="text-2xl font-display font-bold text-slate-800 mb-1">Pelaporan</h1>
-        <p class="text-slate-500">Export data dan kelola laporan Reject & Repeat</p>
-    </div>
+    <x-page-hero
+        title="Pelaporan"
+        :subtitle="'Export data dan kelola laporan Reject & Repeat'"
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('dashboard')],
+            ['label' => 'Input', 'url' => route('laporan.create')],
+            ['label' => 'Pelaporan'],
+        ]"
+    />
 
     <!-- ========================================= -->
     <!-- Section 1: Export Data -->
