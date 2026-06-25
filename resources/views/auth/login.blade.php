@@ -57,9 +57,7 @@
         .login-shell {
             position: relative;
             background:
-                radial-gradient(circle at 95% 92%, rgba(20, 184, 166, 0.58) 0, rgba(20, 184, 166, 0.34) 18rem, rgba(20, 184, 166, 0) 38rem),
-                radial-gradient(circle at 78% 0%, rgba(125, 224, 216, 0.62) 0, rgba(125, 224, 216, 0.24) 17rem, rgba(125, 224, 216, 0) 36rem),
-                linear-gradient(90deg, #f5f6f8 0%, #f7f9fa 48%, #eef8f8 100%);
+                linear-gradient(90deg, #f7f8fa 0%, #ffffff 52%, #f4fbfb 100%);
         }
 
         .hospital-backdrop {
@@ -68,18 +66,45 @@
             z-index: 0;
             pointer-events: none;
             background-image:
-                linear-gradient(90deg, rgba(245, 246, 248, 0.10) 0%, rgba(245, 246, 248, 0.46) 42%, rgba(245, 246, 248, 0.86) 70%, rgba(245, 246, 248, 0.96) 100%),
-                linear-gradient(0deg, rgba(20, 184, 166, 0.24) 0%, rgba(255, 255, 255, 0) 35%),
+                radial-gradient(ellipse 560px 360px at 93% 4%, rgba(95, 217, 207, 0.70) 0%, rgba(95, 217, 207, 0.35) 36%, rgba(95, 217, 207, 0) 72%),
+                radial-gradient(ellipse 620px 360px at 98% 98%, rgba(20, 184, 166, 0.64) 0%, rgba(20, 184, 166, 0.34) 38%, rgba(20, 184, 166, 0) 74%),
+                radial-gradient(ellipse 460px 210px at 4% 100%, rgba(20, 184, 166, 0.38) 0%, rgba(20, 184, 166, 0.20) 46%, rgba(20, 184, 166, 0) 82%),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.40) 34%, rgba(255, 255, 255, 0.82) 60%, rgba(255, 255, 255, 0.95) 100%),
+                linear-gradient(0deg, rgba(20, 184, 166, 0.22) 0%, rgba(20, 184, 166, 0.08) 22%, rgba(255, 255, 255, 0) 48%),
                 url('{{ asset('images/bg-hospital-building-login.png') }}');
             background-repeat: no-repeat;
-            background-size: 100% 100%, 100% 100%, clamp(680px, 62vw, 960px) auto;
-            background-position: center, center, left -88px bottom -118px;
+            background-size:
+                100% 100%,
+                100% 100%,
+                100% 100%,
+                100% 100%,
+                100% 100%,
+                clamp(860px, 74vw, 1180px) auto;
+            background-position:
+                center,
+                center,
+                center,
+                center,
+                center,
+                left -230px bottom -146px;
         }
 
         @media (max-width: 767px) {
             .hospital-backdrop {
-                background-size: 100% 100%, 100% 100%, min(122vw, 620px) auto;
-                background-position: center, center, center bottom -54px;
+                background-size:
+                    100% 100%,
+                    100% 100%,
+                    100% 100%,
+                    100% 100%,
+                    100% 100%,
+                    min(138vw, 720px) auto;
+                background-position:
+                    center,
+                    center,
+                    center,
+                    center,
+                    center,
+                    left -120px bottom -62px;
             }
         }
 
