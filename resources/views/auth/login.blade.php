@@ -55,79 +55,66 @@
         }
 
         .login-shell {
-            background:
-                radial-gradient(circle at 11% 16%, rgba(20, 184, 166, 0.22), transparent 22rem),
-                radial-gradient(circle at 87% 34%, rgba(20, 184, 166, 0.21), transparent 20rem),
-                radial-gradient(circle at 19% 76%, rgba(13, 148, 136, 0.22), transparent 27rem),
-                linear-gradient(115deg, #071a1c 0%, #0b1020 38%, #0b1020 100%);
-        }
-
-        .login-shell::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            opacity: 0.13;
-            background-image:
-                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-            background-size: 72px 72px;
-            mask-image: radial-gradient(circle at center, black, transparent 78%);
-        }
-
-        .logo-shadow {
-            filter:
-                drop-shadow(0 2px 2px rgba(255, 255, 255, 0.44))
-                drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
+            background-color: #f3f7f8;
+            position: relative;
         }
 
         input:-webkit-autofill,
         input:-webkit-autofill:hover,
         input:-webkit-autofill:focus,
         input:-webkit-autofill:active {
-            -webkit-box-shadow: 0 0 0 32px #111827 inset !important;
-            -webkit-text-fill-color: #f8fafc !important;
-            caret-color: #f8fafc;
+            -webkit-box-shadow: 0 0 0 32px #ffffff inset !important;
+            -webkit-text-fill-color: #0f172a !important;
+            caret-color: #0f172a;
             transition: background-color 5000s ease-in-out 0s;
         }
     </style>
 </head>
 
-<body class="login-shell min-h-screen overflow-x-hidden font-sans text-slate-100 antialiased">
+<body class="login-shell min-h-screen overflow-x-hidden font-sans text-slate-900 antialiased relative">
+    <!-- Background Hospital (Full Screen bg-cover) -->
+    <div class="absolute inset-0 w-full h-full bg-cover bg-no-repeat pointer-events-none z-0 bg-left lg:bg-center"
+        style="background-image: url('{{ asset('images/bg-hospital-login.png') }}');">
+    </div>
+
     <header class="pointer-events-none fixed inset-x-0 top-0 z-20 flex items-start justify-between px-6 py-6 md:px-14">
-        <img src="{{ asset('images/logo-unair-login.png') }}" alt="Logo Universitas Airlangga"
-            class="logo-shadow h-16 w-16 object-contain sm:h-20 sm:w-20 md:h-24 md:w-24">
+        <div class="flex flex-col gap-2">
+            <span class="text-[28px] font-semibold tracking-wide text-slate-400/40 select-none">Login</span>
+            <img src="{{ asset('images/logo-unair-login.png') }}" alt="Logo Universitas Airlangga"
+                class="h-16 w-16 object-contain sm:h-20 sm:w-20 md:h-[90px] md:w-[90px]">
+        </div>
 
         <img src="{{ asset('images/logo-vokasi-login.png') }}" alt="Logo Vokasi Sigap"
-            class="logo-shadow mt-1 h-auto w-32 object-contain sm:w-40 md:w-44">
+            class="mt-1 h-auto w-32 object-contain sm:w-40 md:w-[170px]">
     </header>
 
-    <main class="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-4 py-10 pt-32 sm:pt-28 md:pt-10">
-        <section class="w-full max-w-[382px]">
+    <main class="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-4 py-10 pt-36 sm:pt-32 md:pt-10">
+        <section class="w-full max-w-[392px]">
             <div class="mb-5 flex items-end justify-center gap-5">
                 <img src="{{ asset('images/logo-rsud-login.png') }}" alt="Logo RSUD Syarifah Ambami Rato Ebu Bangkalan"
-                    class="logo-shadow h-[70px] w-auto object-contain">
+                    class="h-[65px] w-auto object-contain">
                 <img src="{{ asset('images/logo-rrtrack-login.png') }}" alt="Logo RR-Track"
-                    class="logo-shadow h-[70px] w-auto object-contain">
+                    class="h-[65px] w-auto object-contain">
             </div>
 
-            <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-slate-950/50 shadow-[0_24px_80px_rgba(0,0,0,0.34)] backdrop-blur-xl">
-                <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-400/60 to-transparent"></div>
+            <div class="relative overflow-hidden rounded-[20px] border border-slate-800 bg-white shadow-[0_15px_50px_rgba(0,0,0,0.06)] z-10">
+                <!-- Top border accent line -->
+                <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-teal-500/20 to-transparent"></div>
 
-                <div class="px-5 py-7 sm:px-6">
-                    <div class="mb-7 text-center">
-                        <h1 class="text-[31px] font-bold leading-tight tracking-normal text-white">Selamat Datang</h1>
-                        <p class="mt-2 text-xs font-medium text-brand-500">Sistem Monitoring Reject &amp; Repeat</p>
+                <div class="px-6 py-8 sm:px-8">
+                    <div class="mb-8 text-center">
+                        <h1 class="text-[30px] font-bold leading-tight tracking-tight text-[#0d5c52]">Selamat Datang</h1>
+                        <p class="mt-2 text-[11px] font-semibold text-[#0d9488] tracking-wide uppercase">Sistem Monitoring Reject &amp; Repeat</p>
                     </div>
 
                     @if (session('status'))
-                        <div class="mb-5 rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-center text-sm font-medium text-emerald-200">
+                        <div class="mb-5 rounded-xl border border-emerald-400/20 bg-emerald-50 px-4 py-3 text-center text-sm font-medium text-emerald-800">
                             {{ session('status') }}
                         </div>
                     @endif
 
                     @error('login')
-                        <div class="mb-5 rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-center text-sm font-medium text-red-200">
+                        <div class="mb-5 rounded-xl border border-red-400/20 bg-red-50 px-4 py-3 text-center text-sm font-medium text-red-800">
                             {{ $message }}
                         </div>
                     @enderror
@@ -136,56 +123,56 @@
                         @csrf
 
                         <div>
-                            <label for="email" class="mb-2 block text-sm font-medium text-slate-300">Email Address</label>
+                            <label for="email" class="mb-2 block text-xs font-semibold text-slate-800">Email Address</label>
                             <div class="relative">
-                                <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-300">
+                                <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-800">
                                     <i class="fa-solid fa-envelope text-sm"></i>
                                 </span>
                                 <input id="email" type="email" name="email" value="{{ old('email') }}"
-                                    class="h-[52px] w-full rounded-[9px] border bg-slate-900/45 pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-slate-300/75 focus:border-brand-400 focus:ring-1 focus:ring-brand-400 {{ $errors->has('email') ? 'border-red-400/70 focus:border-red-400 focus:ring-red-400' : 'border-slate-500/70' }}"
+                                    class="h-[50px] w-full rounded-[8px] border border-slate-800 bg-white pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-600 focus:ring-1 focus:ring-teal-600 {{ $errors->has('email') ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-slate-800' }}"
                                     placeholder="admin.rumahsakit@gmail.com" required autofocus autocomplete="username">
                             </div>
                             @error('email')
-                                <p class="mt-2 text-xs font-medium text-red-300">{{ $message }}</p>
+                                <p class="mt-2 text-xs font-medium text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div>
-                            <label for="password" class="mb-2 block text-sm font-medium text-slate-300">Password</label>
+                            <label for="password" class="mb-2 block text-xs font-semibold text-slate-800">Password</label>
                             <div class="relative">
-                                <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+                                <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-800">
                                     <i class="fa-solid fa-lock text-sm"></i>
                                 </span>
                                 <input id="password" type="password" name="password"
-                                    class="h-[52px] w-full rounded-[9px] border bg-slate-900/45 pl-11 pr-4 text-sm text-white outline-none transition placeholder:text-slate-300/70 focus:border-brand-400 focus:ring-1 focus:ring-brand-400 {{ $errors->has('password') ? 'border-red-400/70 focus:border-red-400 focus:ring-red-400' : 'border-slate-500/70' }}"
+                                    class="h-[50px] w-full rounded-[8px] border border-slate-800 bg-white pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-600 focus:ring-1 focus:ring-teal-600 {{ $errors->has('password') ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-slate-800' }}"
                                     placeholder="************" required autocomplete="current-password">
                             </div>
                             @error('password')
-                                <p class="mt-2 text-xs font-medium text-red-300">{{ $message }}</p>
+                                <p class="mt-2 text-xs font-medium text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        <label for="remember_me" class="flex w-fit cursor-pointer items-center gap-3 text-sm text-slate-300">
-                            <span class="relative flex h-6 w-6 items-center justify-center">
+                        <label for="remember_me" class="flex w-fit cursor-pointer items-center gap-3 text-xs font-semibold text-slate-800">
+                            <span class="relative flex h-5 w-5 items-center justify-center">
                                 <input id="remember_me" type="checkbox" name="remember"
-                                    class="peer h-6 w-6 appearance-none rounded-[3px] border border-slate-500/80 bg-slate-900/45 transition checked:border-brand-500 checked:bg-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-400/30">
-                                <i class="fa-solid fa-check pointer-events-none absolute text-xs text-white opacity-0 transition peer-checked:opacity-100"></i>
+                                    class="peer h-5 w-5 appearance-none rounded-[3px] border border-slate-800 bg-white transition checked:border-teal-600 checked:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500/30">
+                                <i class="fa-solid fa-check pointer-events-none absolute text-[10px] text-white opacity-0 transition peer-checked:opacity-100"></i>
                             </span>
                             <span>Ingat Saya</span>
                         </label>
 
                         <button type="submit"
-                            class="flex h-[52px] w-full items-center justify-center gap-3 rounded-[9px] bg-gradient-to-r from-brand-500 to-brand-600 px-5 text-sm font-semibold text-white shadow-[0_7px_16px_rgba(20,184,166,0.34)] transition hover:from-brand-400 hover:to-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-300/60">
-                            <span>Masuk Ke Sistem</span>
-                            <i class="fa-solid fa-arrow-right text-base"></i>
+                            class="flex h-[50px] w-full items-center justify-center gap-2 rounded-[8px] bg-[#0d9488] hover:bg-[#0c8579] px-5 text-sm font-semibold text-white shadow-sm transition focus:outline-none focus:ring-2 focus:ring-teal-500/60">
+                            <span>Masuk Ke Sitem</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
                         </button>
                     </form>
                 </div>
             </div>
 
-            <footer class="mt-2 text-center text-xs font-medium leading-6 text-slate-400/80">
-                <p>{{ date('Y') }} Teknologi Radiologi Pencitraan<br>
-                    <span class="text-slate-500">Universitas Airlangga</span>
+            <footer class="mt-6 text-center text-[11px] font-semibold leading-5 text-slate-700 z-10 relative">
+                <p>2026 Teknologi Radiologi Pencitraan<br>
+                    Universitas Airlangga
                 </p>
             </footer>
         </section>

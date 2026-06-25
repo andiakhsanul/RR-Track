@@ -143,7 +143,7 @@ class LaporanController extends Controller
             $rules['faktor.*'] = 'exists:faktor_penyebab,id_faktor';
         }
 
-        $validated = $request->validate($rules);
+        $validated = $request->validate($rules, $this->customMessages());
 
         // Determine jenis laporan ID
         $isReject = $validated['jenis_laporan'] === 'reject';
@@ -184,10 +184,9 @@ class LaporanController extends Controller
         }
 
         // Redirect based on type
-        $route = $isReject ? 'laporan.reject.index' : 'laporan.repeat.index';
         $message = $isReject ? 'Laporan Reject berhasil ditambahkan!' : 'Laporan Repeat berhasil ditambahkan!';
 
-        return redirect()->route($route)->with('success', $message);
+        return redirect()->route('pelaporan')->with('success', $message);
     }
 
     /**
@@ -207,7 +206,7 @@ class LaporanController extends Controller
             'keterangan' => 'nullable|string',
             'kesalahan_label' => 'nullable|boolean',
             'insiden_reaksi_obat_kontras' => 'nullable|boolean',
-        ]);
+        ], $this->customMessages());
 
         // Find or create pasien
         $pasien = Pasien::firstOrCreate(
@@ -238,7 +237,7 @@ class LaporanController extends Controller
             $laporan->jenisInsiden()->attach($validated['insiden']);
         }
 
-        return redirect()->route('laporan.repeat.index')
+        return redirect()->route('pelaporan')
             ->with('success', 'Laporan Repeat berhasil ditambahkan!');
     }
 
@@ -295,7 +294,7 @@ class LaporanController extends Controller
             $laporan->jenisInsiden()->attach($validated['insiden']);
         }
 
-        return redirect()->route('laporan.reject.index')
+        return redirect()->route('pelaporan')
             ->with('success', 'Laporan Reject berhasil ditambahkan!');
     }
 
@@ -406,7 +405,7 @@ class LaporanController extends Controller
         // Sync insiden
         $laporan->jenisInsiden()->sync($validated['insiden'] ?? []);
 
-        return redirect()->route('laporan.repeat.index')
+        return redirect()->route('pelaporan')
             ->with('success', 'Laporan Repeat berhasil diperbarui!');
     }
 
@@ -460,7 +459,7 @@ class LaporanController extends Controller
         // Sync insiden
         $laporan->jenisInsiden()->sync($validated['insiden'] ?? []);
 
-        return redirect()->route('laporan.reject.index')
+        return redirect()->route('pelaporan')
             ->with('success', 'Laporan Reject berhasil diperbarui!');
     }
 
@@ -472,9 +471,7 @@ class LaporanController extends Controller
         $isRepeat = $laporan->isRepeat();
         $laporan->delete();
 
-        $route = $isRepeat ? 'laporan.repeat.index' : 'laporan.reject.index';
-
-        return redirect()->route($route)
+        return redirect()->route('pelaporan')
             ->with('success', 'Laporan berhasil dihapus!');
     }
 
@@ -526,15 +523,15 @@ class LaporanController extends Controller
     public function exportExcel(Request $request)
     {
         $validated = $request->validate([
-            'bulan' => 'required|integer|min:1|max:12',
-            'tahun' => 'required|integer|min:2020|max:2100',
+            'bulan' => 'nullable|integer|min:1|max:12',
+            'tahun' => 'nullable|integer|min:2020|max:2100',
             'tanggal_awal' => 'nullable|date',
             'tanggal_akhir' => 'nullable|date|after_or_equal:tanggal_awal',
             'modalitas' => 'required|in:all,ct_scan,x_ray',
         ]);
 
-        $bulan = $validated['bulan'];
-        $tahun = $validated['tahun'];
+        $bulan = $validated['bulan'] ?? null;
+        $tahun = $validated['tahun'] ?? null;
         $tanggalAwal = $validated['tanggal_awal'] ?? null;
         $tanggalAkhir = $validated['tanggal_akhir'] ?? null;
         $modalitas = $validated['modalitas'];
@@ -560,11 +557,47 @@ class LaporanController extends Controller
             default => '',
         };
 
-        $filename = "Laporan_Repeat_Reject{$modalitasLabel}_{$namaBulan[$bulan]}_{$tahun}.xlsx";
+        if ($tanggalAwal && $tanggalAkhir) {
+            $tglAwalFmt = \Carbon\Carbon::parse($tanggalAwal)->format('Ymd');
+            $tglAkhirFmt = \Carbon\Carbon::parse($tanggalAkhir)->format('Ymd');
+            $filename = "Laporan_Repeat_Reject{$modalitasLabel}_{$tglAwalFmt}_sd_{$tglAkhirFmt}.xlsx";
+        } elseif ($bulan && $tahun) {
+            $filename = "Laporan_Repeat_Reject{$modalitasLabel}_{$namaBulan[(int)$bulan]}_{$tahun}.xlsx";
+        } else {
+            $filename = "Laporan_Repeat_Reject{$modalitasLabel}_Keseluruhan.xlsx";
+        }
 
         return Excel::download(
             new LaporanRepeatRejectExport($bulan, $tahun, $tanggalAwal, $tanggalAkhir, $modalitas),
             $filename
         );
+    }
+
+    /**
+     * Get custom validation messages in Indonesian
+     */
+    protected function customMessages(): array
+    {
+        return [
+            'jenis_laporan.required' => 'Jenis Laporan Wajib Dipilih.',
+            'jenis_laporan.in' => 'Jenis Laporan tidak valid.',
+            'tanggal_pemeriksaan.required' => 'Tanggal Pemeriksaan Wajib Diisi.',
+            'tanggal_pemeriksaan.date' => 'Format Tanggal Pemeriksaan tidak valid.',
+            'nama_pasien.required' => 'Nama Pasien Wajib Diisi.',
+            'nama_pasien.max' => 'Nama Pasien maksimal 100 karakter.',
+            'no_rm.required' => 'No. Rekam Medis Wajib Diisi.',
+            'no_rm.max' => 'No. Rekam Medis maksimal 20 karakter.',
+            'id_jenis_pemeriksaan.required' => 'Jenis Pemeriksaan Wajib Dipilih.',
+            'id_jenis_pemeriksaan.exists' => 'Jenis Pemeriksaan yang dipilih tidak valid.',
+            'id_modalitas.required' => 'Modalitas Wajib Dipilih.',
+            'id_modalitas.exists' => 'Modalitas yang dipilih tidak valid.',
+            'id_petugas.required' => 'Petugas Wajib Dipilih.',
+            'id_petugas.exists' => 'Petugas yang dipilih tidak valid.',
+            'faktor.required' => 'Faktor Penyebab Wajib Dipilih untuk Laporan Reject.',
+            'faktor.min' => 'Faktor Penyebab Wajib Dipilih minimal 1 untuk Laporan Reject.',
+            'faktor.array' => 'Faktor Penyebab tidak valid.',
+            'faktor.*.exists' => 'Faktor Penyebab yang dipilih tidak valid.',
+            'insiden.*.exists' => 'Insiden Khusus yang dipilih tidak valid.',
+        ];
     }
 }

@@ -159,7 +159,6 @@ class DashboardController extends Controller
      */
     private function getModalitasRejectFactorsData(string $modalitasName): array
     {
-        $colors = ['#EF4444', '#F97316', '#EAB308', '#22C55E', '#3B82F6', '#8B5CF6', '#EC4899', '#6366F1'];
         $date = Carbon::now();
 
         // Get reject reports for current month and modalitas
@@ -200,12 +199,23 @@ class DashboardController extends Controller
         }
 
         $labels = array_keys($factorCounts);
+        $colorMap = [
+            'Human Error' => '#EF4444',
+            'Patient Error' => '#F97316',
+            'Tools Error' => '#EAB308',
+            'Administratif' => '#22C55E',
+        ];
+
+        $mappedColors = [];
+        foreach ($labels as $label) {
+            $mappedColors[] = $colorMap[$label] ?? '#8B5CF6';
+        }
 
         return [
             'labels' => $labels,
             'details' => array_map(fn ($label) => $factorDetails[$label] ?? null, $labels),
             'data' => array_values($factorCounts),
-            'colors' => array_slice($colors, 0, count($factorCounts))
+            'colors' => $mappedColors
         ];
     }
 
@@ -229,13 +239,18 @@ class DashboardController extends Controller
     {
         $faktorList = FaktorPenyebab::withCount('laporan')->get();
 
-        $colors = ['#EF4444', '#F97316', '#EAB308', '#22C55E', '#3B82F6', '#8B5CF6'];
+        $colorMap = [
+            'Human Error' => '#EF4444',
+            'Patient Error' => '#F97316',
+            'Tools Error' => '#EAB308',
+            'Administratif' => '#22C55E',
+        ];
 
         return [
             'labels' => $faktorList->map(fn ($faktor) => $faktor->nama_utama)->toArray(),
             'details' => $faktorList->map(fn ($faktor) => $faktor->detail)->toArray(),
             'data' => $faktorList->pluck('laporan_count')->toArray(),
-            'colors' => array_slice($colors, 0, $faktorList->count())
+            'colors' => $faktorList->map(fn ($faktor) => $colorMap[$faktor->nama_utama] ?? '#8B5CF6')->toArray()
         ];
     }
 }

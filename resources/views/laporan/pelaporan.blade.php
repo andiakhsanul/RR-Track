@@ -49,12 +49,12 @@
                         {{-- Bulan --}}
                         <div>
                             <label for="bulan" class="block text-sm font-medium text-slate-600 mb-1.5">
-                                Bulan <span class="text-red-400">*</span>
+                                Bulan
                             </label>
                             <div class="relative">
-                                <select name="bulan" id="bulan" required
+                                <select name="bulan" id="bulan"
                                     class="w-full rounded-xl border-slate-200 bg-slate-50/50 shadow-sm focus:border-emerald-500 focus:ring focus:ring-emerald-200 focus:ring-opacity-50 focus:bg-white transition-all text-sm pl-9">
-                                    <option value="">Pilih Bulan</option>
+                                    <option value="">Pilih Bulan (Opsional)</option>
                                     @php
                                         $namaBulan = [
                                             1 => 'Januari',
@@ -73,7 +73,7 @@
                                         $currentMonth = date('n');
                                     @endphp
                                     @foreach ($namaBulan as $num => $nama)
-                                        <option value="{{ $num }}" {{ old('bulan', $currentMonth) == $num ? 'selected' : '' }}>
+                                        <option value="{{ $num }}" {{ old('bulan') == $num ? 'selected' : '' }}>
                                             {{ $nama }}
                                         </option>
                                     @endforeach
@@ -87,15 +87,15 @@
                         {{-- Tahun --}}
                         <div>
                             <label for="tahun" class="block text-sm font-medium text-slate-600 mb-1.5">
-                                Tahun <span class="text-red-400">*</span>
+                                Tahun
                             </label>
                             <div class="relative">
-                                <select name="tahun" id="tahun" required
+                                <select name="tahun" id="tahun"
                                     class="w-full rounded-xl border-slate-200 bg-slate-50/50 shadow-sm focus:border-emerald-500 focus:ring focus:ring-emerald-200 focus:ring-opacity-50 focus:bg-white transition-all text-sm pl-9">
-                                    <option value="">Pilih Tahun</option>
+                                    <option value="">Pilih Tahun (Opsional)</option>
                                     @php $currentYear = date('Y'); @endphp
                                     @for ($year = $currentYear; $year >= 2020; $year--)
-                                        <option value="{{ $year }}" {{ old('tahun', $currentYear) == $year ? 'selected' : '' }}>
+                                        <option value="{{ $year }}" {{ old('tahun') == $year ? 'selected' : '' }}>
                                             {{ $year }}
                                         </option>
                                     @endfor

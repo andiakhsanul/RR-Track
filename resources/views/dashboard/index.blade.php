@@ -306,13 +306,13 @@
                     datasets: [{
                         label: 'Repeat',
                         data: {!! json_encode($chartBulananCTScan['repeat'] ?? []) !!},
-                        backgroundColor: 'rgba(99, 102, 241, 0.8)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
                         borderWidth: 0,
                         borderRadius: 8,
                     }, {
                         label: 'Reject',
                         data: {!! json_encode($chartBulananCTScan['reject'] ?? []) !!},
-                        backgroundColor: 'rgba(236, 72, 153, 0.8)',
+                        backgroundColor: 'rgba(239, 68, 68, 0.8)',
                         borderWidth: 0,
                         borderRadius: 8,
                     }]

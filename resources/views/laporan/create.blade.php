@@ -86,8 +86,7 @@
 
                     <!-- Data Laporan Section -->
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                        <div class="px-6 py-4 border-b border-slate-100 transition-colors"
-                            :class="isReject ? 'bg-gradient-to-r from-red-500 to-red-600' : 'bg-gradient-to-r from-teal-500 to-teal-600'">
+                        <div class="px-6 py-4 border-b border-slate-100 bg-gradient-to-r from-red-500 to-red-600">
                             <h2 class="text-lg font-semibold text-white flex items-center">
                                 <i class="fas fa-file-medical mr-3"></i>
                                 Data Laporan
@@ -197,13 +196,13 @@
 
                     <!-- Data Pasien Section -->
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                        <div class="bg-gradient-to-r from-green-500 to-green-600 px-5 py-3">
-                            <h2 class="text-base font-semibold text-white flex items-center">
-                                <i class="fas fa-user-injured mr-2.5"></i>
+                        <div class="bg-gradient-to-r from-green-500 to-green-600 px-6 py-4">
+                            <h2 class="text-lg font-semibold text-white flex items-center">
+                                <i class="fas fa-user-injured mr-3"></i>
                                 Data Pasien
                             </h2>
                         </div>
-                        <div class="p-5">
+                        <div class="p-6">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <!-- No RM -->
                                 <div class="space-y-1.5">
@@ -249,13 +248,13 @@
                         x-transition:enter-start="opacity-0 transform -translate-y-4"
                         x-transition:enter-end="opacity-100 transform translate-y-0"
                         class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-visible">
-                        <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-5 py-3">
-                            <h2 class="text-base font-semibold text-white flex items-center">
-                                <i class="fas fa-exclamation-triangle mr-2.5"></i>
+                        <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-4 rounded-t-2xl">
+                            <h2 class="text-lg font-semibold text-white flex items-center">
+                                <i class="fas fa-exclamation-triangle mr-3"></i>
                                 Faktor Penyebab Reject
                             </h2>
                         </div>
-                        <div class="p-5">
+                        <div class="p-6">
                             <p class="text-xs text-slate-500 mb-3">Pilih satu atau lebih faktor penyebab reject:</p>
                             <div class="grid grid-cols-2 md:grid-cols-3 gap-2.5">
                                 @foreach($faktorPenyebab as $faktor)
@@ -316,7 +315,7 @@
 
                     <!-- Keterangan Section -->
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                        <div class="bg-gradient-to-r from-purple-500 to-purple-600 px-6 py-4">
+                        <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
                             <h2 class="text-lg font-semibold text-white flex items-center">
                                 <i class="fas fa-comment-alt mr-3"></i>
                                 Keterangan Tambahan
@@ -334,8 +333,7 @@
                     <!-- Submit Buttons -->
                     <div class="lg:col-span-2 flex flex-wrap gap-2">
                         <button type="submit"
-                            class="flex-1 py-3 px-6 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
-                            :class="isReject ? 'bg-gradient-to-r from-red-500 to-red-600' : 'bg-gradient-to-r from-teal-500 to-teal-600'">
+                            class="flex-1 py-3 px-6 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all bg-gradient-to-r from-teal-500 to-teal-600">
                             <i class="fas fa-save mr-2"></i> Simpan Laporan
                         </button>
                     </div>

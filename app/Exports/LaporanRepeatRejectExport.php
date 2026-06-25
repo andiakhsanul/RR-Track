@@ -23,7 +23,7 @@ class LaporanRepeatRejectExport implements WithEvents, WithTitle, WithDrawings
     protected $modalitas; // 'all', 'ct_scan', 'x_ray'
     protected $data;
 
-    public function __construct(int $bulan, int $tahun, string $tanggalAwal = null, string $tanggalAkhir = null, string $modalitas = 'all')
+    public function __construct(?int $bulan, ?int $tahun, ?string $tanggalAwal = null, ?string $tanggalAkhir = null, string $modalitas = 'all')
     {
         $this->bulan = $bulan;
         $this->tahun = $tahun;
@@ -35,12 +35,19 @@ class LaporanRepeatRejectExport implements WithEvents, WithTitle, WithDrawings
 
     protected function loadData()
     {
-        $query = Laporan::with(['pasien', 'petugas', 'modalitas', 'jenisPemeriksaan', 'faktorPenyebab', 'jenisLaporan'])
-            ->whereYear('tanggal_pemeriksaan', $this->tahun)
-            ->whereMonth('tanggal_pemeriksaan', $this->bulan);
+        $query = Laporan::with(['pasien', 'petugas', 'modalitas', 'jenisPemeriksaan', 'faktorPenyebab', 'jenisLaporan']);
 
+        // Date range takes precedence
         if ($this->tanggalAwal && $this->tanggalAkhir) {
-            $query->whereBetween('tanggal_pemeriksaan', [$this->tanggalAwal, $this->tanggalAkhir]);
+            $query->whereDate('tanggal_pemeriksaan', '>=', $this->tanggalAwal)
+                  ->whereDate('tanggal_pemeriksaan', '<=', $this->tanggalAkhir);
+        } else {
+            if ($this->tahun) {
+                $query->whereYear('tanggal_pemeriksaan', $this->tahun);
+            }
+            if ($this->bulan) {
+                $query->whereMonth('tanggal_pemeriksaan', $this->bulan);
+            }
         }
 
         // Filter by modalitas
@@ -133,8 +140,16 @@ class LaporanRepeatRejectExport implements WithEvents, WithTitle, WithDrawings
 
     public function title(): string
     {
-        $namaBulan = $this->getNamaBulan($this->bulan);
-        return "Laporan {$namaBulan} {$this->tahun}";
+        if ($this->tanggalAwal && $this->tanggalAkhir) {
+            $tglAwal = Carbon::parse($this->tanggalAwal)->format('d M Y');
+            $tglAkhir = Carbon::parse($this->tanggalAkhir)->format('d M Y');
+            return "Laporan {$tglAwal} - {$tglAkhir}";
+        } elseif ($this->bulan && $this->tahun) {
+            $namaBulan = $this->getNamaBulan($this->bulan);
+            return "Laporan {$namaBulan} {$this->tahun}";
+        } else {
+            return "Laporan Keseluruhan";
+        }
     }
 
     public function drawings()
@@ -207,12 +222,15 @@ class LaporanRepeatRejectExport implements WithEvents, WithTitle, WithDrawings
                 $sheet->setCellValue('A3', 'INSTALASI RADIOLOGI');
 
                 // Period text
-                $namaBulan = $this->getNamaBulan($this->bulan);
-                $periodText = "Bulan :  {$namaBulan} {$this->tahun}";
                 if ($this->tanggalAwal && $this->tanggalAkhir) {
                     $tglAwal = Carbon::parse($this->tanggalAwal)->format('d F Y');
                     $tglAkhir = Carbon::parse($this->tanggalAkhir)->format('d F Y');
-                    $periodText .= " / {$tglAwal} - {$tglAkhir}";
+                    $periodText = "Periode : {$tglAwal} - {$tglAkhir}";
+                } elseif ($this->bulan && $this->tahun) {
+                    $namaBulan = $this->getNamaBulan($this->bulan);
+                    $periodText = "Bulan : {$namaBulan} {$this->tahun}";
+                } else {
+                    $periodText = "Periode : Keseluruhan";
                 }
                 $sheet->setCellValue('A5', $periodText);
 

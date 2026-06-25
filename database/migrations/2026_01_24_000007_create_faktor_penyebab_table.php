@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('faktor_penyebab', function (Blueprint $table) {
             $table->smallIncrements('id_faktor');
-            $table->string('nama_faktor', 100)->change();
+            $table->string('nama_faktor', 100);
             $table->timestamps();
         });
     }
